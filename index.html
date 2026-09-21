@@ -102,24 +102,120 @@ body{overflow-x:hidden;background-image:linear-gradient(rgba(80,145,220,.045) 1p
  .bottom-nav{width:calc(100% - 18px);height:74px;bottom:max(9px,env(safe-area-inset-bottom));border-radius:25px;padding:7px 6px}.nav-btn{height:58px;font-size:9px;border-radius:17px}.nav-btn img{width:21px;height:21px}.nav-chat{width:68px;height:68px;margin-top:-28px}.nav-chat::before{width:37px;height:37px}
 }
 html{scroll-behavior:smooth}body{padding-bottom:8px}
-</style>
 
-<style id="nexora-tradingview-market">
-.tv-ticker{min-height:108px;overflow:hidden}
-.tv-ticker>.price{width:58%;min-width:170px}
-.tv-mini{height:80px;width:100%;overflow:hidden;border-radius:12px}
-.tv-mini .tradingview-widget-container,.tv-mini .tradingview-widget-container__widget{height:80px!important;width:100%!important}
-.tv-big{margin-top:15px;border:1px solid var(--line2);border-radius:18px;overflow:hidden;background:#07101f;min-height:360px}
-.tv-big .tradingview-widget-container{height:360px!important;width:100%!important}
-@media(max-width:520px){
- .tv-ticker{display:block;padding:13px}
- .tv-ticker>.price{width:100%;min-width:0;margin-top:7px;text-align:left}
- .tv-mini{height:78px}
- .tv-mini .tradingview-widget-container,.tv-mini .tradingview-widget-container__widget{height:78px!important}
- .tv-big,.tv-big .tradingview-widget-container{min-height:330px;height:330px!important}
+/* NEXORA ALPHA — POLISHED PAGE HEADERS */
+.section-head{
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:20px;
+  margin:26px 0 22px;
+  padding:22px 22px 20px;
+  border:1px solid rgba(125,179,255,.13);
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(73,145,255,.13), transparent 42%),
+    linear-gradient(135deg, rgba(11,27,50,.92), rgba(5,14,28,.78));
+  box-shadow:0 18px 45px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.035);
+  overflow:hidden;
 }
-</style>
+.section-head::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:92px;
+  height:2px;
+  background:linear-gradient(90deg,#65adff,transparent);
+  box-shadow:0 0 18px rgba(75,156,255,.65);
+}
+.section-head::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-100px;
+  top:-120px;
+  border-radius:50%;
+  background:rgba(64,140,255,.10);
+  filter:blur(8px);
+  pointer-events:none;
+}
+.page-heading{
+  position:relative;
+  z-index:1;
+  min-width:0;
+}
+.page-kicker{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  width:max-content;
+  max-width:100%;
+  margin-bottom:9px;
+  padding:6px 10px;
+  border:1px solid rgba(117,181,255,.17);
+  border-radius:999px;
+  background:rgba(60,125,210,.09);
+  color:#8fc5ff;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1.7px;
+  text-transform:uppercase;
+}
+.page-kicker::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#64b1ff;
+  box-shadow:0 0 10px rgba(100,177,255,.9);
+}
+.section-title{
+  margin:0;
+  font-size:34px;
+  line-height:1.04;
+  letter-spacing:-.9px;
+  font-weight:900;
+  color:#f5f9ff;
+  text-shadow:0 0 28px rgba(86,157,255,.10);
+}
+.section-title .title-accent{
+  background:linear-gradient(90deg,#fff 0%,#a9d3ff 55%,#5ca8ff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.section-sub{
+  max-width:620px;
+  margin:9px 0 0;
+  color:#8ea3c1;
+  font-size:13px;
+  line-height:1.55;
+}
+.page-index{
+  position:absolute;
+  right:22px;
+  bottom:17px;
+  color:rgba(139,171,210,.35);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+@media(max-width:850px){
+  .section-head{align-items:flex-start;flex-direction:column;padding:19px 18px 18px}
+  .section-title{font-size:29px}
+  .page-index{right:18px;bottom:14px}
+}
+@media(max-width:520px){
+  .section-head{margin:20px 0 17px;border-radius:20px;padding:17px 16px 16px}
+  .page-kicker{font-size:8px;letter-spacing:1.35px}
+  .section-title{font-size:27px;letter-spacing:-.6px}
+  .section-sub{font-size:12px;max-width:95%}
+}
 
+</style>
 </head>
 <body>
 <div class="app">
@@ -129,34 +225,12 @@ html{scroll-behavior:smooth}body{padding-bottom:8px}
 <div class="hero"><img class="hero-logo" src="hero-logo.png" alt=""><div class="eyebrow">NEXORA ALPHA • V6 ELITE</div><h1>WELCOME TO THE<br>NEXORA ALPHA ERA</h1><p>Trade Smart. Manage Risk. Build Legacy.
 Jelajahi market, bangun fondasi trading, dan pelajari cara membaca pergerakan harga dengan lebih terstruktur.</p><div class="cta-row"><button class="btn primary" onclick="go('community')">✦ Join Nexora</button><button class="btn" onclick="go('academy')">Explore Academy →</button></div><div class="feature-grid"><div class="feature" onclick="go('market')"><span class="emoji">📈</span><h3>Market</h3><p>Terminal & live chart</p></div><div class="feature" onclick="go('market');setMarketTab('news')"><span class="emoji">📰</span><h3>News</h3><p>FOMC, CPI, PPI & NFP</p></div><div class="feature" onclick="go('academy')"><span class="emoji">🎓</span><h3>Academy</h3><p>Belajar trading terstruktur</p></div><div class="feature" onclick="go('chat')"><span class="emoji">👥</span><h3>Community Chat</h3><p>Diskusi dan berbagi analisa</p></div></div></div>
 </section>
-<section id="market" class="section"><div class="section-head"><div><h2 class="section-title">Market</h2><p class="section-sub">Pantau market dan berita penting dalam satu tempat.</p></div><div class="segmented"><button id="tab-market" class="active" onclick="setMarketTab('market')">Market</button><button id="tab-news" onclick="setMarketTab('news')">News</button></div></div><div id="market-view" class="market-grid">
-<div class="panel">
-<h3>Market Watch</h3>
-<div class="market-list">
-<div class="ticker tv-ticker"><div><strong>XAUUSD</strong><small>Gold / US Dollar</small></div><div class="price"><div class="tv-mini"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"OANDA:XAUUSD","width":"100%","height":"80","locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false}</script></div></div></div></div>
-<div class="ticker tv-ticker"><div><strong>EURUSD</strong><small>Euro / US Dollar</small></div><div class="price"><div class="tv-mini"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"OANDA:EURUSD","width":"100%","height":"80","locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false}</script></div></div></div></div>
-<div class="ticker tv-ticker"><div><strong>GBPUSD</strong><small>Pound / US Dollar</small></div><div class="price"><div class="tv-mini"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"OANDA:GBPUSD","width":"100%","height":"80","locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false}</script></div></div></div></div>
-<div class="ticker tv-ticker"><div><strong>BTCUSD</strong><small>Bitcoin / US Dollar</small></div><div class="price"><div class="tv-mini"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"COINBASE:BTCUSD","width":"100%","height":"80","locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false}</script></div></div></div></div>
-<div class="ticker tv-ticker"><div><strong>USDIDR 🇮🇩</strong><small>US Dollar / Indonesian Rupiah</small></div><div class="price"><div class="tv-mini"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"FX_IDC:USDIDR","width":"100%","height":"80","locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false}</script></div></div></div></div>
-</div></div>
-<div class="panel">
-<h3>Market Snapshot</h3>
-<p class="section-sub">Mini chart TradingView untuk memantau pergerakan harga.</p>
-<div class="tv-big">
-<div class="tradingview-widget-container"><div id="tradingview_nexora_chart"></div>
-<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-<script>
-new TradingView.widget({
-"width":"100%","height":360,"symbol":"OANDA:XAUUSD","interval":"15","timezone":"Asia/Jakarta","theme":"dark","style":"1","locale":"en","enable_publishing":false,"hide_top_toolbar":false,"hide_legend":false,"save_image":false,"container_id":"tradingview_nexora_chart"
-});
-</script></div></div>
-</div></div>
-<div id="news-view" style="display:none" class="news-list"><div class="news"><div class="tag">HIGH IMPACT • USD</div><h3>Federal Reserve — FOMC Decision</h3><p>Preview berita makro.
+<section id="market" class="section"><div class="section-head"><div class="page-heading"><div class="page-kicker">NEXORA TERMINAL • LIVE MARKET</div><h2 class="section-title"><span class="title-accent">Market</span></h2><p class="section-sub">Pantau market, chart, dan berita penting dalam satu tempat.</p></div><div class="page-index">01 / 03</div><div class="segmented"><button id="tab-market" class="active" onclick="setMarketTab('market')">Market</button><button id="tab-news" onclick="setMarketTab('news')">News</button></div></div><div id="market-view" class="market-grid"><div class="panel"><h3>Market Watch</h3><div class="market-list"><div class="ticker"><div><strong>XAUUSD</strong><small>Gold / US Dollar</small></div><div class="price"><div>2,650.40</div><div class="up">+0.82%</div></div></div><div class="ticker"><div><strong>EURUSD</strong><small>Euro / US Dollar</small></div><div class="price"><div>1.1742</div><div class="up">+0.31%</div></div></div><div class="ticker"><div><strong>GBPUSD</strong><small>Pound / US Dollar</small></div><div class="price"><div>1.3498</div><div class="up">+0.44%</div></div></div><div class="ticker"><div><strong>BTCUSD</strong><small>Bitcoin / US Dollar</small></div><div class="price"><div>112,840</div><div class="up">+1.25%</div></div></div></div></div><div class="panel"><h3>Market Snapshot</h3><p class="section-sub">Chart dan data live akan masuk setelah backend diaktifkan.</p><div style="height:230px;border:1px dashed var(--line2);border-radius:18px;margin-top:18px;display:grid;place-items:center;color:#7187a6">CHART PREVIEW</div></div></div><div id="news-view" style="display:none" class="news-list"><div class="news"><div class="tag">HIGH IMPACT • USD</div><h3>Federal Reserve — FOMC Decision</h3><p>Preview berita makro.
 Konten real-time akan dihubungkan ke sumber news pada tahap berikutnya.</p></div><div class="news"><div class="tag">HIGH IMPACT • USD</div><h3>Consumer Price Index (CPI)</h3><p>Ruang untuk headline, ringkasan, waktu rilis, dan dampak market.</p></div><div class="news"><div class="tag">MEDIUM IMPACT • USD</div><h3>Producer Price Index (PPI)</h3><p>UI berita dibuat siap untuk data dinamis tanpa mengubah layout.</p></div></div></section>
-<section id="chat" class="section"><div class="section-head"><div><h2 class="section-title">Community Chat</h2><p class="section-sub">Tempat diskusi, berbagi analisa, dan ngobrol bareng member Nexora.</p></div></div><div class="chat-shell"><aside class="chat-side"><div class="side-item">⌂</div><div class="side-item">⌁</div><div class="side-item">▣</div><div class="side-item active">💬</div><div class="side-item">◆</div><div class="side-item">♟</div></aside><div class="chat-main"><div class="chat-head"><div class="chat-name"><img src="logo.png" alt=""><div><b>NEXORA COMMUNITY</b><div class="online">● 128 online</div></div></div><div class="chat-tools"><button class="mini">⌕</button><button class="mini">🔔</button></div></div><div class="pinned">📌 <b>Pesan yang Disematkan</b><br>Selamat datang di Nexora Alpha Community! Jaga sikap dan gunakan bahasa yang baik.</div><div class="messages"><div class="msg"><div class="avatar">J</div><div class="bubble-wrap"><div class="meta">Jalaludin · 👑 ADMIN</div><div class="bubble">Market lagi menarik nih, ada yang mantau area 1950?</div><div class="reactions"><span class="reaction">🔥 12</span><span class="reaction">👍 4</span><span class="reaction">↩</span></div></div></div><div class="msg"><div class="avatar">R</div><div class="bubble-wrap"><div class="meta">Rizky · MOD</div><div class="bubble">@Jalaludin iya bang, saya juga lagi mantau.
+<section id="chat" class="section"><div class="section-head"><div class="page-heading"><div class="page-kicker">NEXORA COMMUNITY • CONNECT</div><h2 class="section-title"><span class="title-accent">Community Chat</span></h2><p class="section-sub">Tempat diskusi, berbagi insight, dan ngobrol bareng member Nexora.</p></div><div class="page-index">02 / 03</div></div><div class="chat-shell"><aside class="chat-side"><div class="side-item">⌂</div><div class="side-item">⌁</div><div class="side-item">▣</div><div class="side-item active">💬</div><div class="side-item">◆</div><div class="side-item">♟</div></aside><div class="chat-main"><div class="chat-head"><div class="chat-name"><img src="logo.png" alt=""><div><b>NEXORA COMMUNITY</b><div class="online">● 128 online</div></div></div><div class="chat-tools"><button class="mini">⌕</button><button class="mini">🔔</button></div></div><div class="pinned">📌 <b>Pesan yang Disematkan</b><br>Selamat datang di Nexora Alpha Community! Jaga sikap dan gunakan bahasa yang baik.</div><div class="messages"><div class="msg"><div class="avatar">J</div><div class="bubble-wrap"><div class="meta">Jalaludin · 👑 ADMIN</div><div class="bubble">Market lagi menarik nih, ada yang mantau area 1950?</div><div class="reactions"><span class="reaction">🔥 12</span><span class="reaction">👍 4</span><span class="reaction">↩</span></div></div></div><div class="msg"><div class="avatar">R</div><div class="bubble-wrap"><div class="meta">Rizky · MOD</div><div class="bubble">@Jalaludin iya bang, saya juga lagi mantau.
 Kalau break 1950 bisa lanjut ke 1980.</div><div class="reactions"><span class="reaction">👍 3</span><span class="reaction">↩</span></div></div></div><div class="msg"><div class="avatar">D</div><div class="bubble-wrap"><div class="meta">Dimas · MEMBER · 14:26</div><div class="bubble">Ada yang punya analisa untuk EURUSD hari ini?</div><div class="reactions"><span class="reaction">👍 2</span><span class="reaction">↩</span></div></div></div><div class="msg"><div class="avatar">A</div><div class="bubble-wrap"><div class="meta">Andi · MEMBER · 14:27</div><div class="bubble">Menurut gue setup-nya cukup bagus buat buy, tinggal tunggu confirmation.</div><div class="reactions"><span class="reaction">🔥 6</span><span class="reaction">👍 2</span><span class="reaction">↩</span></div></div></div></div><div class="composer"><button class="mini">＋</button><input placeholder="Ketik pesan..." disabled><button class="send" disabled>➤</button></div></div><aside class="members"><h3>Member <span style="color:var(--muted);font-weight:400">Online (128)</span></h3><div class="member"><div class="avatar">J</div><div><div class="member-name">Jalaludin</div><div class="role">👑 ADMIN</div></div><span class="member-dot"></span></div><div class="member"><div class="avatar">R</div><div><div class="member-name">Rizky</div><div class="role">MOD</div></div><span class="member-dot"></span></div><div class="member"><div class="avatar">D</div><div><div class="member-name">Dimas</div><div class="role">MEMBER</div></div><span class="member-dot"></span></div><div class="member"><div class="avatar">A</div><div><div class="member-name">Andi</div><div class="role">MEMBER</div></div><span class="member-dot"></span></div><div class="member"><div class="avatar">F</div><div><div class="member-name">Fahri</div><div class="role">MEMBER</div></div><span class="member-dot"></span></div><div class="member"><div class="avatar">N</div><div><div class="member-name">Naufal</div><div class="role">MEMBER</div></div><span class="member-dot"></span></div></aside></div></section>
-<section id="academy" class="section"><div class="section-head"><div><h2 class="section-title">Academy</h2><p class="section-sub">Belajar trading secara terstruktur.</p></div></div><div class="cards"><div class="panel info-card"><h3>📘 Fundamental</h3><p>Materi ekonomi, news impact, FOMC, CPI, PPI, NFP, dan cara membaca sentimen market.</p></div><div class="panel info-card"><h3>📊 Technical Analysis</h3><p>Support & resistance, EMA, MACD, Fibonacci, market structure, dan analisa multi-timeframe.</p></div><div class="panel info-card"><h3>🧠 Smart Money</h3><p>BOS, CHoCH, liquidity, order block, FVG, supply-demand, dan framework analisa.</p></div></div></section>
-<section id="community" class="section"><div class="section-head"><div><h2 class="section-title">Community</h2><p class="section-sub">Nexora bukan sekadar tempat belajar — ini ruang untuk tumbuh bersama.</p></div></div><div class="cards"><div class="panel info-card"><h3>💬 Community Chat</h3><p>Diskusi market, berbagi setup, bertanya, dan saling membantu.
+<section id="academy" class="section"><div class="section-head"><div class="page-heading"><div class="page-kicker">NEXORA ACADEMY • LEARNING</div><h2 class="section-title"><span class="title-accent">Academy</span></h2><p class="section-sub">Bangun fondasi dan pelajari market secara terstruktur, step by step.</p></div><div class="page-index">03 / 03</div></div><div class="cards"><div class="panel info-card"><h3>📘 Fundamental</h3><p>Materi ekonomi, news impact, FOMC, CPI, PPI, NFP, dan cara membaca sentimen market.</p></div><div class="panel info-card"><h3>📊 Technical Analysis</h3><p>Support & resistance, EMA, MACD, Fibonacci, market structure, dan analisa multi-timeframe.</p></div><div class="panel info-card"><h3>🧠 Smart Money</h3><p>BOS, CHoCH, liquidity, order block, FVG, supply-demand, dan framework analisa.</p></div></div></section>
+<section id="community" class="section"><div class="section-head"><div class="page-heading"><div class="page-kicker">NEXORA COMMUNITY • GROW TOGETHER</div><h2 class="section-title"><span class="title-accent">Community</span></h2><p class="section-sub">Nexora bukan sekadar tempat belajar — ini ruang untuk tumbuh bersama.</p></div><div class="page-index">COMMUNITY</div></div><div class="cards"><div class="panel info-card"><h3>💬 Community Chat</h3><p>Diskusi market, berbagi setup, bertanya, dan saling membantu.
 Masuk ke Chat dari navigasi bawah.</p><button class="btn primary" onclick="go('chat')">Buka Chat →</button></div><div class="panel info-card"><h3>👥 Member</h3><p>Profil member, role badge, status online, dan aktivitas komunitas akan diaktifkan pada tahap backend.</p></div><div class="panel info-card"><h3>🛡️ Safe Community</h3><p>Moderasi, report, admin controls, dan role system disiapkan untuk tahap integrasi Supabase.</p></div></div></section>
 </main><p class="note">UI PREVIEW • Backend, Auth, Supabase, dan Realtime belum diaktifkan.</p>
 </div>
