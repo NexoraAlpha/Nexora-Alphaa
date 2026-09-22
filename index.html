@@ -215,6 +215,17 @@ html{scroll-behavior:smooth}body{padding-bottom:8px}
   .section-sub{font-size:12px;max-width:95%}
 }
 
+
+.news-calendar-head{padding-bottom:14px}
+.news-calendar-head h3{font-size:18px;margin:8px 0 6px}
+.news-calendar-head p{margin:0}
+.news-calendar{padding:10px;overflow:hidden;min-height:760px}
+.news-calendar .tradingview-widget-container{min-height:740px}
+.news-calendar .tradingview-widget-copyright{display:none}
+@media (max-width:700px){
+.news-calendar{padding:6px;min-height:720px}
+.news-calendar .tradingview-widget-container{min-height:700px}
+}
 </style>
 </head>
 <body>
@@ -247,8 +258,29 @@ new TradingView.widget({
 });
 </script></div></div>
 </div></div>
-<div id="news-view" style="display:none" class="news-list"><div class="news"><div class="tag">HIGH IMPACT • USD</div><h3>Federal Reserve — FOMC Decision</h3><p>Preview berita makro.
-Konten real-time akan dihubungkan ke sumber news pada tahap berikutnya.</p></div><div class="news"><div class="tag">HIGH IMPACT • USD</div><h3>Consumer Price Index (CPI)</h3><p>Ruang untuk headline, ringkasan, waktu rilis, dan dampak market.</p></div><div class="news"><div class="tag">MEDIUM IMPACT • USD</div><h3>Producer Price Index (PPI)</h3><p>UI berita dibuat siap untuk data dinamis tanpa mengubah layout.</p></div></div></section>
+<div id="news-view" style="display:none" class="news-list">
+<div class="news news-calendar-head">
+<div class="tag">NEXORA ECONOMIC CALENDAR • HIGH IMPACT</div>
+<h3>NFP, CPI, PPI, FOMC &amp; News Market</h3>
+<p>Kalender ekonomi realtime dari TradingView. Menampilkan event berdampak tinggi beserta tanggal, jam rilis, negara/mata uang, dan data Actual / Forecast / Previous.</p>
+</div>
+<div class="news news-calendar">
+<div class="tradingview-widget-container" style="width:100%;">
+<div class="tradingview-widget-container__widget"></div>
+<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+{
+  "width": "100%",
+  "height": 760,
+  "colorTheme": "dark",
+  "isTransparent": true,
+  "locale": "en",
+  "importanceFilter": "1",
+  "timezone": "Asia/Jakarta"
+}
+</script>
+</div>
+</div>
+</div></section>
 <section id="chat" class="section"><div class="section-head"><div class="page-heading"><div class="page-kicker">NEXORA COMMUNITY • CONNECT</div><h2 class="section-title"><span class="title-accent">Community Chat</span></h2><p class="section-sub">Tempat diskusi, berbagi insight, dan ngobrol bareng member Nexora.</p></div><div class="page-index">02 / 03</div></div><div class="chat-shell"><aside class="chat-side"><div class="side-item">⌂</div><div class="side-item">⌁</div><div class="side-item">▣</div><div class="side-item active">💬</div><div class="side-item">◆</div><div class="side-item">♟</div></aside><div class="chat-main"><div class="chat-head"><div class="chat-name"><img src="logo.png" alt=""><div><b>NEXORA COMMUNITY</b><div class="online">● 128 online</div></div></div><div class="chat-tools"><button class="mini">⌕</button><button class="mini">🔔</button></div></div><div class="pinned">📌 <b>Pesan yang Disematkan</b><br>Selamat datang di Nexora Alpha Community! Jaga sikap dan gunakan bahasa yang baik.</div><div class="messages"><div class="msg"><div class="avatar">J</div><div class="bubble-wrap"><div class="meta">Jalaludin · 👑 ADMIN</div><div class="bubble">Market lagi menarik nih, ada yang mantau area 1950?</div><div class="reactions"><span class="reaction">🔥 12</span><span class="reaction">👍 4</span><span class="reaction">↩</span></div></div></div><div class="msg"><div class="avatar">R</div><div class="bubble-wrap"><div class="meta">Rizky · MOD</div><div class="bubble">@Jalaludin iya bang, saya juga lagi mantau.
 Kalau break 1950 bisa lanjut ke 1980.</div><div class="reactions"><span class="reaction">👍 3</span><span class="reaction">↩</span></div></div></div><div class="msg"><div class="avatar">D</div><div class="bubble-wrap"><div class="meta">Dimas · MEMBER · 14:26</div><div class="bubble">Ada yang punya analisa untuk EURUSD hari ini?</div><div class="reactions"><span class="reaction">👍 2</span><span class="reaction">↩</span></div></div></div><div class="msg"><div class="avatar">A</div><div class="bubble-wrap"><div class="meta">Andi · MEMBER · 14:27</div><div class="bubble">Menurut gue setup-nya cukup bagus buat buy, tinggal tunggu confirmation.</div><div class="reactions"><span class="reaction">🔥 6</span><span class="reaction">👍 2</span><span class="reaction">↩</span></div></div></div></div><div class="composer"><button class="mini">＋</button><input placeholder="Ketik pesan..." disabled><button class="send" disabled>➤</button></div></div><aside class="members"><h3>Member <span style="color:var(--muted);font-weight:400">Online (128)</span></h3><div class="member"><div class="avatar">J</div><div><div class="member-name">Jalaludin</div><div class="role">👑 ADMIN</div></div><span class="member-dot"></span></div><div class="member"><div class="avatar">R</div><div><div class="member-name">Rizky</div><div class="role">MOD</div></div><span class="member-dot"></span></div><div class="member"><div class="avatar">D</div><div><div class="member-name">Dimas</div><div class="role">MEMBER</div></div><span class="member-dot"></span></div><div class="member"><div class="avatar">A</div><div><div class="member-name">Andi</div><div class="role">MEMBER</div></div><span class="member-dot"></span></div><div class="member"><div class="avatar">F</div><div><div class="member-name">Fahri</div><div class="role">MEMBER</div></div><span class="member-dot"></span></div><div class="member"><div class="avatar">N</div><div><div class="member-name">Naufal</div><div class="role">MEMBER</div></div><span class="member-dot"></span></div></aside></div></section>
 <section id="academy" class="section"><div class="section-head"><div class="page-heading"><div class="page-kicker">NEXORA ACADEMY • LEARNING</div><h2 class="section-title"><span class="title-accent">Academy</span></h2><p class="section-sub">Bangun fondasi dan pelajari market secara terstruktur, step by step.</p></div><div class="page-index">03 / 03</div></div><div class="cards"><div class="panel info-card"><h3>📘 Fundamental</h3><p>Materi ekonomi, news impact, FOMC, CPI, PPI, NFP, dan cara membaca sentimen market.</p></div><div class="panel info-card"><h3>📊 Technical Analysis</h3><p>Support & resistance, EMA, MACD, Fibonacci, market structure, dan analisa multi-timeframe.</p></div><div class="panel info-card"><h3>🧠 Smart Money</h3><p>BOS, CHoCH, liquidity, order block, FVG, supply-demand, dan framework analisa.</p></div></div></section>
