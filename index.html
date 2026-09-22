@@ -390,6 +390,16 @@ body.chat-focus-mode #chat .composer{padding-bottom:max(10px,env(safe-area-inset
 }
 
 
+/* NEXORA MARKET MOBILE SAFETY — overflow fix only */
+.tv-ticker{min-width:0;overflow:hidden}
+.tv-ticker>div:first-child{min-width:105px}
+.tv-ticker .price{width:min(240px,58%);min-width:0}
+.tv-mini{width:100%;height:80px;overflow:hidden;border-radius:10px}
+.tv-mini .tradingview-widget-container{width:100%!important;height:80px!important;min-width:0;overflow:hidden}
+.tv-mini .tradingview-widget-container__widget{width:100%!important;height:80px!important;min-width:0}
+.tv-mini iframe{display:block;max-width:100%!important;border:0}
+@media(max-width:520px){.tv-ticker .price{width:52%}.tv-ticker>div:first-child{min-width:92px}.tv-mini{height:76px}.tv-mini .tradingview-widget-container,.tv-mini .tradingview-widget-container__widget{height:76px!important}}
+<script>
 /* NEXORA ACADEMY CMS */
 .academy-catalog{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .academy-card{position:relative;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(10,28,52,.92),rgba(5,14,28,.92));padding:18px;min-height:180px;cursor:pointer;transition:.18s;overflow:hidden}
@@ -412,7 +422,7 @@ Jelajahi market, bangun fondasi trading, dan pelajari cara membaca pergerakan ha
 <div class="panel">
 <h3>Market Watch</h3>
 <div class="market-list">
-<div class="ticker tv-ticker"><div><strong>XAUUSD</strong><small>Gold / US Dollar</small></div><div class="price"><div class="tv-mini"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"OANDA:XAUUSD","width":"100%","height":"80","locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false}\n/* NEXORA ACADEMY CMS */
+<div class="ticker tv-ticker"><div><strong>XAUUSD</strong><small>Gold / US Dollar</small></div><div class="price"><div class="tv-mini"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"OANDA:XAUUSD","width":"100%","height":"80","locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false}</script></div></div></div></div>\n/* NEXORA ACADEMY CMS */
 let academyCourses=[],academyChapters=[],academyCurrentCourse=null,academyEditingCourseId=null,academyEditingChapterId=null,academyCourseCoverUrl=null;
 function academyEsc(s){return esc(s||"");}
 function academySlug(s){return (s||"").toLowerCase().trim().replace(/[^a-z0-9\s-]/g,"").replace(/\s+/g,"-").replace(/-+/g,"-").replace(/^-|-$/g,"").slice(0,120);}
@@ -464,7 +474,8 @@ async function academyInsertImage(e){const file=e.target.files?.[0];if(!file)ret
 async function saveAcademyChapter(){if(currentProfile?.role!=="ADMIN")return alert('Admin only.');const course_id=document.getElementById('academy-chapter-course').value;const title=document.getElementById('academy-chapter-title').value.trim();const description=document.getElementById('academy-chapter-desc').value.trim();const content_html=document.getElementById('academy-content-editor').innerHTML.trim();if(!course_id||!title)return alert('Materi dan judul bab wajib diisi.');const existing=academyChapters.filter(x=>x.course_id===course_id&&x.id!==academyEditingChapterId);const payload={course_id,title,description,content_html,updated_at:new Date().toISOString()};let res;if(academyEditingChapterId)res=await supabaseClient.from('academy_chapters').update(payload).eq('id',academyEditingChapterId).select().single();else res=await supabaseClient.from('academy_chapters').insert({...payload,created_by:currentUser.id,sort_order:existing.length}).select().single();if(res.error)return document.getElementById('academy-chapter-message').textContent=res.error.message;closeModal('academy-chapter-modal');await loadAcademy();renderAcademyAdminChapters();}
 async function deleteAcademyChapter(id){if(currentProfile?.role!=="ADMIN")return;if(!confirm('Hapus bab ini?'))return;const {error}=await supabaseClient.from('academy_chapters').delete().eq('id',id);if(error)return alert(error.message);await loadAcademy();renderAcademyAdminChapters();}
 
-</script></div></div></div></div>
+</script>
+<!-- end NEXORA ACADEMY CMS -->
 <div class="ticker tv-ticker"><div><strong>EURUSD</strong><small>Euro / US Dollar</small></div><div class="price"><div class="tv-mini"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"OANDA:EURUSD","width":"100%","height":"80","locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false}</script></div></div></div></div>
 <div class="ticker tv-ticker"><div><strong>GBPUSD</strong><small>Pound / US Dollar</small></div><div class="price"><div class="tv-mini"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"OANDA:GBPUSD","width":"100%","height":"80","locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false}</script></div></div></div></div>
 <div class="ticker tv-ticker"><div><strong>BTCUSD</strong><small>Bitcoin / US Dollar</small></div><div class="price"><div class="tv-mini"><div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>{"symbol":"COINBASE:BTCUSD","width":"100%","height":"80","locale":"en","dateRange":"1D","colorTheme":"dark","isTransparent":true,"autosize":false}</script></div></div></div></div>
