@@ -426,17 +426,16 @@ body.chat-focus-mode #chat .composer{padding-bottom:max(10px,env(safe-area-inset
 body.chat-focus-mode #chat-back-btn{display:grid!important}
 
 /* NEXORA ALPHA — AMBIENT BACKGROUND ANIMATION */
-body::before,body::after{content:"";position:fixed;inset:-12%;pointer-events:none;z-index:0;opacity:0;will-change:transform,opacity;background-repeat:no-repeat}
-body::before{background:radial-gradient(circle at 18% 22%,rgba(55,143,255,.28),transparent 22%),radial-gradient(circle at 82% 68%,rgba(38,108,255,.22),transparent 27%),radial-gradient(circle at 55% 4%,rgba(95,227,255,.15),transparent 20%),radial-gradient(circle at 45% 88%,rgba(70,104,255,.12),transparent 24%);filter:blur(20px);transform:translate3d(0,0,0) scale(1)}
-body::after{background-image:linear-gradient(rgba(80,145,220,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(80,145,220,.075) 1px,transparent 1px);background-size:46px 46px;mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.9) 18%,rgba(0,0,0,.9) 82%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.9) 18%,rgba(0,0,0,.9) 82%,transparent 100%);transform:translate3d(0,0,0)}
+body::before,body::after{content:"";position:fixed;inset:-18%;pointer-events:none;z-index:0;opacity:0;will-change:transform,opacity,background-position;background-repeat:no-repeat}
+body::before{background:radial-gradient(circle at 16% 20%,rgba(54,145,255,.42),transparent 20%),radial-gradient(circle at 84% 24%,rgba(46,108,255,.30),transparent 24%),radial-gradient(circle at 76% 78%,rgba(36,164,255,.28),transparent 25%),radial-gradient(circle at 30% 82%,rgba(73,92,255,.25),transparent 23%),radial-gradient(circle at 52% 5%,rgba(119,228,255,.20),transparent 18%);filter:blur(30px);transform:translate3d(0,0,0) scale(1);background-size:130% 130%}
+body::after{background-image:linear-gradient(rgba(80,145,220,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(80,145,220,.10) 1px,transparent 1px),radial-gradient(circle at 50% 50%,rgba(60,150,255,.12) 0 1px,transparent 2px);background-size:48px 48px,48px 48px,34px 34px;mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.95) 12%,rgba(0,0,0,.95) 88%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.95) 12%,rgba(0,0,0,.95) 88%,transparent 100%);transform:translate3d(0,0,0)}
 .app{position:relative;z-index:1}
-body.nx-animations-on{background-position:0 0,0 0,75% 35%,18% 18%;animation:nxBackgroundDrift 20s ease-in-out infinite alternate}
-body.nx-animations-on::before{opacity:1;animation:nxAmbientFloat 13s ease-in-out infinite alternate}
-body.nx-animations-on::after{opacity:.72;animation:nxGridDrift 18s linear infinite}
-@keyframes nxBackgroundDrift{0%{background-position:0 0,0 0,75% 35%,18% 18%}50%{background-position:18px 10px,-14px 8px,68% 42%,25% 12%}100%{background-position:-14px 18px,12px -12px,82% 28%,12% 25%}}
-@keyframes nxAmbientFloat{0%{transform:translate3d(-3%,-2%,0) scale(1)}50%{transform:translate3d(3%,2%,0) scale(1.07)}100%{transform:translate3d(-2%,4%,0) scale(1.03)}}
-@keyframes nxGridDrift{0%{transform:translate3d(0,0,0)}50%{transform:translate3d(23px,12px,0)}100%{transform:translate3d(0,24px,0)}}
-@media(prefers-reduced-motion:reduce){body.nx-animations-on{animation:none}body.nx-animations-on::before,body.nx-animations-on::after{animation:none}}
+body.nx-animations-on{background-position:0 0,0 0,75% 35%,18% 18%;animation:nxBackgroundDrift 15s ease-in-out infinite alternate}
+body.nx-animations-on::before{opacity:.92;animation:nxAmbientFloat 8s ease-in-out infinite alternate}
+body.nx-animations-on::after{opacity:.82;animation:nxGridDrift 11s linear infinite}
+@keyframes nxBackgroundDrift{0%{background-position:0 0,0 0,75% 35%,18% 18%}50%{background-position:24px 14px,-20px 12px,66% 44%,26% 10%}100%{background-position:-20px 24px,18px -18px,84% 26%,10% 28%}}
+@keyframes nxAmbientFloat{0%{transform:translate3d(-5%,-3%,0) scale(1)}50%{transform:translate3d(5%,3%,0) scale(1.10)}100%{transform:translate3d(-3%,5%,0) scale(1.05)}}
+@keyframes nxGridDrift{0%{transform:translate3d(0,0,0)}50%{transform:translate3d(30px,16px,0)}100%{transform:translate3d(-8px,30px,0)}}
 .appearance-setting{margin-top:14px}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}.setting-copy{min-width:0}.setting-copy strong{display:block;font-size:14px}.setting-copy span{display:block;color:var(--muted);font-size:12px;line-height:1.45;margin-top:4px}.nx-switch{position:relative;width:52px;height:30px;flex:none}.nx-switch input{position:absolute;opacity:0;width:0;height:0}.nx-switch-track{position:absolute;inset:0;border:1px solid var(--line2);border-radius:999px;background:rgba(7,18,34,.9);transition:.2s}.nx-switch-track:before{content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;border-radius:50%;background:#71829d;box-shadow:0 3px 10px rgba(0,0,0,.3);transition:.2s}.nx-switch input:checked + .nx-switch-track{background:rgba(42,117,235,.34);box-shadow:inset 0 0 16px rgba(45,133,255,.18),0 0 12px rgba(45,133,255,.12)}.nx-switch input:checked + .nx-switch-track:before{transform:translateX(22px);background:#79b7ff;box-shadow:0 0 12px rgba(91,159,255,.7)}
 </style>
 </head>
@@ -715,7 +714,7 @@ async function deleteAcademyChapter(id){if(currentProfile?.role!=="ADMIN")return
 <script>
 function setBackgroundAnimation(enabled){document.body.classList.toggle("nx-animations-on",enabled);try{localStorage.setItem("nexora_bg_animation",enabled?"on":"off");}catch(e){}}
 function toggleBackgroundAnimation(enabled){setBackgroundAnimation(!!enabled);}
-function initBackgroundAnimation(){let saved=null;try{saved=localStorage.getItem("nexora_bg_animation");}catch(e){}const enabled=saved? saved==="on" : !window.matchMedia("(prefers-reduced-motion: reduce)").matches;setBackgroundAnimation(enabled);const toggle=document.getElementById("background-animation-toggle");if(toggle)toggle.checked=enabled;}
+function initBackgroundAnimation(){let saved=null;try{saved=localStorage.getItem("nexora_bg_animation");}catch(e){}const enabled=saved? saved==="on" : true;setBackgroundAnimation(enabled);const toggle=document.getElementById("background-animation-toggle");if(toggle)toggle.checked=enabled;}
 const _nexoraOriginalOpenSettings=window.openSettings;window.openSettings=async function(){if(typeof _nexoraOriginalOpenSettings==="function")await _nexoraOriginalOpenSettings();const toggle=document.getElementById("background-animation-toggle");if(toggle)toggle.checked=document.body.classList.contains("nx-animations-on");};
 document.addEventListener("DOMContentLoaded",initBackgroundAnimation);
 </script>
