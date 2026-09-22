@@ -356,11 +356,39 @@ html{scroll-behavior:smooth}body{padding-bottom:8px}
 .admin-only{display:none}.admin-visible{display:block}
 @media(max-width:850px){.mobile-chat-tools{display:flex}.feature-grid-modal{grid-template-columns:1fr}.chat-head .chat-tools{display:none}.chat-shell{min-height:650px}.members{display:none}}
 
+
+/* NEXORA CHAT FULLSCREEN — only active while Chat is open */
+.chat-back-btn{display:none;width:42px;height:42px;flex:none;border:1px solid var(--line);border-radius:13px;background:rgba(13,27,50,.78);color:#fff;font-size:30px;line-height:1;place-items:center;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.2)}
+body.chat-focus-mode{overflow:hidden}
+body.chat-focus-mode .app{max-width:none;width:100%;padding:0}
+body.chat-focus-mode .topbar{position:fixed;left:0;right:0;top:0;width:100%;max-width:none;height:72px;margin:0;border-radius:0;border-left:0;border-right:0;border-top:0;padding:10px 16px;z-index:2000}
+body.chat-focus-mode .chat-back-btn{display:grid}
+body.chat-focus-mode main{padding-top:72px}
+body.chat-focus-mode .bottom-nav{display:none}
+body.chat-focus-mode #chat .section-head{display:none}
+body.chat-focus-mode #chat .chat-shell{width:100%;height:calc(100dvh - 72px);min-height:calc(100dvh - 72px);gap:0}
+body.chat-focus-mode #chat .chat-main{height:100%;min-height:0;border-radius:0;border-left:0;border-right:0}
+body.chat-focus-mode #chat .messages{padding-bottom:14px}
+body.chat-focus-mode #chat .composer{padding-bottom:max(10px,env(safe-area-inset-bottom))}
+@media(max-width:850px){
+ body.chat-focus-mode .topbar{height:64px;padding:8px 10px}
+ body.chat-focus-mode main{padding-top:64px}
+ body.chat-focus-mode #chat .chat-shell{height:calc(100dvh - 64px);min-height:calc(100dvh - 64px)}
+ body.chat-focus-mode #chat .chat-head{border-radius:0}
+ body.chat-focus-mode .brand-title{font-size:11px}
+}
+@media(max-width:520px){
+ body.chat-focus-mode .topbar{height:62px}
+ body.chat-focus-mode main{padding-top:62px}
+ body.chat-focus-mode #chat .chat-shell{height:calc(100dvh - 62px);min-height:calc(100dvh - 62px)}
+ body.chat-focus-mode .chat-back-btn{width:40px;height:40px;font-size:28px}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
-<header class="topbar"><div class="brand"><img src="logo.png" alt=""><div><div class="brand-title">NEXORA ALPHA</div><div class="brand-sub">Trade Smart. Manage Risk. Build Legacy.</div></div></div><div class="top-actions"><button id="notify-btn" class="icon-btn has-dot" onclick="openNotifications()" title="Notifikasi">🔔<span class="notify-dot"></span></button><button class="icon-btn" onclick="openSettings()" title="Pengaturan">⚙️</button><button class="status" id="auth-status" onclick="openAuth()" title="Account"><img src="logo.png" alt=""><span id="auth-dot" class="dot"></span></button></div></header>
+<header class="topbar"><button id="chat-back-btn" class="chat-back-btn" onclick="goBackFromChat()" aria-label="Kembali" title="Kembali">‹</button><div class="brand"><img src="logo.png" alt=""><div><div class="brand-title">NEXORA ALPHA</div><div class="brand-sub">Trade Smart. Manage Risk. Build Legacy.</div></div></div><div class="top-actions"><button id="notify-btn" class="icon-btn has-dot" onclick="openNotifications()" title="Notifikasi">🔔<span class="notify-dot"></span></button><button class="icon-btn" onclick="openSettings()" title="Pengaturan">⚙️</button><button class="status" id="auth-status" onclick="openAuth()" title="Account"><img src="logo.png" alt=""><span id="auth-dot" class="dot"></span></button></div></header>
 <main>
 <section id="home" class="section active">
 <div class="hero"><img class="hero-logo" src="hero-logo.png" alt=""><div class="eyebrow">NEXORA ALPHA • V6 ELITE</div><h1>WELCOME TO THE<br>NEXORA ALPHA ERA</h1><p>Trade Smart. Manage Risk. Build Legacy.
@@ -455,7 +483,9 @@ const sections=[...document.querySelectorAll('.section')],nav=[...document.query
 let currentUser=null,currentProfile=null,authMode="login",chatChannel=null,presenceChannel=null,dmChannel=null;
 let replyTarget=null,selectedMember=null,selectedDMUser=null,onlineIds=new Set(),allMembers=[];
 
-function go(id){sections.forEach(s=>s.classList.toggle('active',s.id===id));nav.forEach(n=>n.classList.toggle('active',n.dataset.target===id));window.scrollTo({top:0,behavior:'smooth'});if(id==="chat"&&currentUser)loadCommunity();}
+let currentSectionId="home",previousSectionId="home";
+function go(id){if(id!==currentSectionId){previousSectionId=currentSectionId;currentSectionId=id;}document.body.classList.toggle("chat-focus-mode",id==="chat");sections.forEach(s=>s.classList.toggle("active",s.id===id));nav.forEach(n=>n.classList.toggle("active",n.dataset.target===id));window.scrollTo({top:0,behavior:"smooth"});if(id==="chat"&&currentUser)loadCommunity();}
+function goBackFromChat(){const target=previousSectionId&&previousSectionId!=="chat"?previousSectionId:"home";go(target);}
 function setMarketTab(tab){document.getElementById('tab-market').classList.toggle('active',tab==='market');document.getElementById('tab-news').classList.toggle('active',tab==='news');document.getElementById('market-view').style.display=tab==='market'?'grid':'none';document.getElementById('news-view').style.display=tab==='news'?'grid':'none';if(tab==='news')go('market');}
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
 function roleLabel(role){return role==="ADMIN"?"👑 ADMIN":role==="MOD"?"🛡️ MOD":role==="STUDENT"?"🎓 STUDENT":"MEMBER";}
