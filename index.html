@@ -481,9 +481,27 @@ body.nx-animations-on{background-color:#050b17}
 
 /* Respect reduced-motion without removing the manual intensity control. */
 @media(prefers-reduced-motion:reduce){.nx-motion-glow,.nx-light-streak,#nx-bg-motion::before,#nx-bg-motion::after{animation:none!important}}
+
+/* NEXORA CINEMATIC MAX — background only */
+#nx-bg-motion{background:radial-gradient(circle at 50% 45%,#061b3d 0%,#020817 52%,#01050e 100%)!important}
+#nx-bg-motion .nx-motion-glow{filter:blur(38px)!important;mix-blend-mode:screen!important}
+#nx-bg-motion .nx-motion-glow.one{width:78vw!important;height:78vw!important;left:-28vw!important;top:-2vh!important;background:radial-gradient(circle,rgba(20,120,255,.95) 0%,rgba(20,120,255,.50) 28%,rgba(20,120,255,.16) 52%,transparent 74%)!important}
+#nx-bg-motion .nx-motion-glow.two{width:72vw!important;height:72vw!important;right:-26vw!important;top:14vh!important;background:radial-gradient(circle,rgba(20,140,255,.88) 0%,rgba(38,92,255,.48) 30%,rgba(0,200,255,.14) 55%,transparent 76%)!important}
+#nx-bg-motion .nx-motion-glow.three{width:66vw!important;height:66vw!important;left:18vw!important;bottom:-28vw!important;background:radial-gradient(circle,rgba(0,220,255,.80) 0%,rgba(0,125,255,.38) 32%,rgba(0,90,255,.12) 58%,transparent 78%)!important}
+#nx-bg-motion::before{inset:-55%!important;background-size:46px 46px!important;opacity:.52!important;animation:nxMotionGrid 6s linear infinite!important;mask-image:linear-gradient(to bottom,transparent 0%,#000 10%,#000 90%,transparent 100%)!important;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 10%,#000 90%,transparent 100%)!important}
+#nx-bg-motion::after{inset:-15%!important;opacity:.98!important;background:radial-gradient(circle at 72% 46%,rgba(38,148,255,.34),transparent 19%),radial-gradient(circle at 20% 68%,rgba(0,210,255,.28),transparent 22%),radial-gradient(circle at 52% 42%,rgba(30,100,255,.20),transparent 34%)!important;animation:nxMotionPulse 3.2s ease-in-out infinite alternate!important}
+.nx-light-streak{height:3px!important;width:58vw!important;max-width:720px!important;box-shadow:0 0 12px rgba(53,164,255,.7),0 0 30px rgba(0,126,255,.42)!important}
+.nx-light-streak.s6{top:31%;left:-55%;transform:rotate(18deg);animation-delay:-2.4s!important}
+.nx-light-streak.s7{top:58%;left:-62%;transform:rotate(-16deg);animation-delay:-5.2s!important}
+.nx-light-streak.s8{top:76%;left:-50%;transform:rotate(27deg);animation-delay:-7.1s!important}
+.nx-light-streak.s9{top:12%;left:-58%;transform:rotate(-34deg);animation-delay:-8.5s!important}
+.nx-light-streak.s10{top:88%;left:-58%;transform:rotate(-12deg);animation-delay:-10s!important}
+#home .feature{background:linear-gradient(145deg,rgba(5,20,43,.30),rgba(2,10,24,.18))!important;backdrop-filter:blur(5px)!important}
+#home .cta-row .btn:not(.primary){background:rgba(5,22,48,.22)!important;backdrop-filter:blur(5px)!important}
+#home .hero-logo{filter:drop-shadow(0 15px 55px rgba(69,157,255,.48))!important}
 </style>
 </head>
-<body><div id="nx-bg-motion" aria-hidden="true"><canvas id="nx-bg-canvas"></canvas><span class="nx-motion-glow one"></span><span class="nx-motion-glow two"></span><span class="nx-motion-glow three"></span><span class="nx-light-streak s1"></span><span class="nx-light-streak s2"></span><span class="nx-light-streak s3"></span><span class="nx-light-streak s4"></span><span class="nx-light-streak s5"></span></div>
+<body><div id="nx-bg-motion" aria-hidden="true"><canvas id="nx-bg-canvas"></canvas><span class="nx-motion-glow one"></span><span class="nx-motion-glow two"></span><span class="nx-motion-glow three"></span><span class="nx-light-streak s1"></span><span class="nx-light-streak s2"></span><span class="nx-light-streak s3"></span><span class="nx-light-streak s4"></span><span class="nx-light-streak s5"></span><span class="nx-light-streak s6"></span><span class="nx-light-streak s7"></span><span class="nx-light-streak s8"></span><span class="nx-light-streak s9"></span><span class="nx-light-streak s10"></span></div>
 <div class="app">
 <header class="topbar"><button id="chat-back-btn" class="chat-back-btn" onclick="goBackFromChat()" aria-label="Kembali" title="Kembali">‹</button><div class="brand"><img src="logo.png" alt=""><div><div class="brand-title">NEXORA ALPHA</div><div class="brand-sub">Trade Smart. Manage Risk. Build Legacy.</div></div></div><div class="top-actions"><button id="notify-btn" class="icon-btn has-dot" onclick="openNotifications()" title="Notifikasi" aria-label="Notifikasi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="notify-dot"></span></button><button class="icon-btn" onclick="openSettings()" title="Pengaturan" aria-label="Pengaturan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.7 1.7-.06-.06A1.7 1.7 0 0 0 16.16 18l-.04.02a1.7 1.7 0 0 0-1.06 1.56V20h-2.4v-.42A1.7 1.7 0 0 0 11.6 18l-.04-.02a1.7 1.7 0 0 0-1.88.34l-.06.06-1.7-1.7.06-.06A1.7 1.7 0 0 0 8.3 15l-.02-.04A1.7 1.7 0 0 0 6.72 13.9H6.3v-2.4h.42A1.7 1.7 0 0 0 8.28 10l.02-.04a1.7 1.7 0 0 0-.34-1.88L7.9 8.02l1.7-1.7.06.06a1.7 1.7 0 0 0 1.88.34l.04-.02A1.7 1.7 0 0 0 12.64 5.14V4.7h2.4v.44A1.7 1.7 0 0 0 16.1 6.7l.04.02a1.7 1.7 0 0 0 1.88-.34l.06-.06 1.7 1.7-.06.06A1.7 1.7 0 0 0 19.38 10l.02.04a1.7 1.7 0 0 0 1.56 1.06h.44v2.4h-.44A1.7 1.7 0 0 0 19.4 15Z" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="status" id="auth-status" onclick="openAuth()" title="Account"><img src="logo.png" alt=""><span id="auth-dot" class="dot"></span></button></div></header>
 <main>
@@ -759,9 +777,9 @@ async function deleteAcademyChapter(id){if(currentProfile?.role!=="ADMIN")return
 function setBackgroundAnimation(enabled){document.body.classList.toggle("nx-animations-on",enabled);try{localStorage.setItem("nexora_bg_animation",enabled?"on":"off");}catch(e){}}
 function applyBackgroundAnimationStrength(value){const n=Math.max(0,Math.min(100,Number(value)||0));document.documentElement.style.setProperty("--nx-anim-strength",(n/100).toFixed(2));const label=document.getElementById("background-animation-strength-value");if(label)label.textContent=Math.round(n)+"%";const range=document.getElementById("background-animation-strength");if(range){range.value=Math.round(n);range.style.background=`linear-gradient(90deg,#1766cf 0%,#43a7ff ${n}%,#172944 ${n}%,#172944 100%)`;range.disabled=!document.body.classList.contains("nx-animations-on");}}
 function setBackgroundAnimationStrength(value){const n=Math.max(0,Math.min(100,Number(value)||0));applyBackgroundAnimationStrength(n);try{localStorage.setItem("nexora_bg_animation_strength",String(Math.round(n)));}catch(e){}}
-function toggleBackgroundAnimation(enabled){setBackgroundAnimation(!!enabled);let savedStrength=60;try{const raw=localStorage.getItem("nexora_bg_animation_strength");if(raw!==null)savedStrength=Math.max(0,Math.min(100,Number(raw)||0));}catch(e){}applyBackgroundAnimationStrength(savedStrength);}
-function initBackgroundAnimation(){let saved=null,strength=null;try{saved=localStorage.getItem("nexora_bg_animation");strength=localStorage.getItem("nexora_bg_animation_strength");}catch(e){}const enabled=saved?saved==="on":true;const level=strength!==null?Math.max(0,Math.min(100,Number(strength)||0)):60;setBackgroundAnimation(enabled);applyBackgroundAnimationStrength(level);const toggle=document.getElementById("background-animation-toggle");if(toggle)toggle.checked=enabled;initNxCanvas();}
-const _nexoraOriginalOpenSettings=window.openSettings;window.openSettings=async function(){if(typeof _nexoraOriginalOpenSettings==="function")await _nexoraOriginalOpenSettings();const toggle=document.getElementById("background-animation-toggle");if(toggle)toggle.checked=document.body.classList.contains("nx-animations-on");let strength=60;try{const raw=localStorage.getItem("nexora_bg_animation_strength");if(raw!==null)strength=Math.max(0,Math.min(100,Number(raw)||0));}catch(e){}applyBackgroundAnimationStrength(strength);};
+function toggleBackgroundAnimation(enabled){setBackgroundAnimation(!!enabled);let savedStrength=100;try{const raw=localStorage.getItem("nexora_bg_animation_strength");if(raw!==null)savedStrength=Math.max(0,Math.min(100,Number(raw)||0));}catch(e){}applyBackgroundAnimationStrength(savedStrength);}
+function initBackgroundAnimation(){let saved=null,strength=null;try{saved=localStorage.getItem("nexora_bg_animation");strength=localStorage.getItem("nexora_bg_animation_strength");}catch(e){}const enabled=saved?saved==="on":true;const level=strength!==null?Math.max(0,Math.min(100,Number(strength)||0)):100;setBackgroundAnimation(enabled);applyBackgroundAnimationStrength(level);const toggle=document.getElementById("background-animation-toggle");if(toggle)toggle.checked=enabled;initNxCanvas();}
+const _nexoraOriginalOpenSettings=window.openSettings;window.openSettings=async function(){if(typeof _nexoraOriginalOpenSettings==="function")await _nexoraOriginalOpenSettings();const toggle=document.getElementById("background-animation-toggle");if(toggle)toggle.checked=document.body.classList.contains("nx-animations-on");let strength=100;try{const raw=localStorage.getItem("nexora_bg_animation_strength");if(raw!==null)strength=Math.max(0,Math.min(100,Number(raw)||0));}catch(e){}applyBackgroundAnimationStrength(strength);};
 function initNxCanvas(){
   const c=document.getElementById("nx-bg-canvas");
   if(!c||c.dataset.ready)return;
@@ -776,8 +794,9 @@ function initNxCanvas(){
     c.style.width=w+"px";c.style.height=h+"px";ctx.setTransform(dpr,0,0,dpr,0,0);
   };
   resize();window.addEventListener("resize",resize,{passive:true});
-  for(let i=0;i<115;i++)particles.push({x:Math.random(),y:Math.random(),r:.45+Math.random()*1.7,v:.00012+Math.random()*.00042,a:.25+Math.random()*.6,p:Math.random()*Math.PI*2});
-  for(let i=0;i<9;i++)streaks.push({x:Math.random()*1.2-.1,y:.08+Math.random()*.84,len:.10+Math.random()*.22,sp:.0015+Math.random()*.0026,ang:-.28+(Math.random()-.5)*.35,delay:Math.random()});
+  for(let i=0;i<260;i++)particles.push({x:Math.random(),y:Math.random(),r:.45+Math.random()*1.7,v:.00012+Math.random()*.00042,a:.25+Math.random()*.6,p:Math.random()*Math.PI*2});
+  for(let i=0;i<22;i++)streaks.push({x:Math.random()*1.2-.1,y:.06+Math.random()*.88,len:.08+Math.random()*.30,sp:.0015+Math.random()*.0032,ang:-.30+(Math.random()-.5)*.42,delay:Math.random()});
+   for(let i=0;i<70;i++)sparkles.push({x:Math.random(),y:Math.random(),r:1+Math.random()*2.2,p:Math.random()*Math.PI*2,tw:.8+Math.random()*2.2});
   const draw=()=>{
     t+=.008;ctx.clearRect(0,0,w,h);
     const on=document.body.classList.contains("nx-animations-on");
@@ -810,9 +829,9 @@ function initNxCanvas(){
 
       /* 4) large orbital arcs */
       ctx.save();ctx.translate(w*.50,h*.48);ctx.rotate(Math.sin(t*.22)*.035);
-      for(let i=0;i<5;i++){
-        const rx=Math.min(w,h)*(.34+i*.075),ry=rx*.48;
-        ctx.strokeStyle=`rgba(45,157,255,${(.13+i*.018)*strength})`;ctx.lineWidth=.8+strength*1.7;ctx.beginPath();
+      for(let i=0;i<9;i++){
+        const rx=Math.min(w,h)*(.32+i*.060),ry=rx*.46;
+        ctx.strokeStyle=`rgba(45,170,255,${(.19+i*.025)*strength})`;ctx.lineWidth=.8+strength*1.7;ctx.beginPath();
         ctx.ellipse(0,0,rx,ry,-.12+i*.02,Math.PI*.08,Math.PI*1.78);ctx.stroke();
       }
       ctx.restore();
@@ -820,12 +839,12 @@ function initNxCanvas(){
       /* 5) pulsing dotted energy globe */
       const gx=w*.76,gy=h*.48,gr=Math.min(w,h)*.25;
       ctx.save();
-      for(let yy=-gr;yy<=gr;yy+=9){for(let xx=-gr;xx<=gr;xx+=9){const nx=xx/gr,ny=yy/gr;if(nx*nx+ny*ny>1)continue;const wave=.5+.5*Math.sin(t*1.4+nx*7+ny*5);const a=(.06+.16*wave)*strength*(1-Math.min(1,(nx*nx+ny*ny))*.45);ctx.fillStyle=`rgba(65,179,255,${a})`;ctx.fillRect(gx+xx,gy+yy,1.3,1.3)}}
+      for(let yy=-gr;yy<=gr;yy+=7){for(let xx=-gr;xx<=gr;xx+=7){const nx=xx/gr,ny=yy/gr;if(nx*nx+ny*ny>1)continue;const wave=.5+.5*Math.sin(t*1.4+nx*7+ny*5);const a=(.10+.28*wave)*strength*(1-Math.min(1,(nx*nx+ny*ny))*.45);ctx.fillStyle=`rgba(65,179,255,${a})`;ctx.fillRect(gx+xx,gy+yy,1.3,1.3)}}
       ctx.restore();
 
       /* ambient pulse over the full scene */
       const pulse=.5+.5*Math.sin(t*.72);const rg=ctx.createRadialGradient(w*.5,h*.48,Math.min(w,h)*.08,w*.5,h*.48,Math.max(w,h)*.72);
-      rg.addColorStop(0,`rgba(36,128,255,${.025*strength*(.7+.3*pulse)})`);rg.addColorStop(.55,`rgba(0,105,255,${.055*strength*(.65+.35*pulse)})`);rg.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=rg;ctx.fillRect(0,0,w,h);
+      rg.addColorStop(0,`rgba(36,128,255,${.07*strength*(.7+.3*pulse)})`);rg.addColorStop(.55,`rgba(0,105,255,${.12*strength*(.65+.35*pulse)})`);rg.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=rg;ctx.fillRect(0,0,w,h);
     }
     requestAnimationFrame(draw);
   };
