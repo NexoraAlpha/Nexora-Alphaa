@@ -11,7 +11,7 @@ html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-f
 body{overflow-x:hidden;background-image:linear-gradient(rgba(80,145,220,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(80,145,220,.045) 1px,transparent 1px),radial-gradient(circle at 75% 35%,rgba(36,135,255,.13),transparent 30%),radial-gradient(circle at 18% 18%,rgba(70,104,255,.10),transparent 28%);background-size:42px 42px,42px 42px,auto,auto}
 .app{max-width:1180px;margin:auto;padding:22px 18px 145px}
 .topbar{height:72px;border:1px solid var(--line);border-radius:25px;background:rgba(5,14,28,.78);backdrop-filter:blur(22px);display:flex;align-items:center;justify-content:space-between;padding:10px 14px;box-shadow:var(--shadow);position:sticky;top:12px;z-index:30}
-.brand{display:flex;align-items:center;gap:12px}.brand img{width:45px;height:45px;object-fit:contain;border-radius:14px}.brand-title{font-weight:800;letter-spacing:.16em;font-size:13px}.brand-sub{font-size:10px;color:var(--muted);margin-top:3px}.top-actions{display:flex;gap:9px}.icon-btn{width:46px;height:46px;border:1px solid var(--line);border-radius:15px;background:rgba(13,27,50,.7);color:var(--text);font-size:20px;display:grid;place-items:center}.status{display:flex;align-items:center;gap:8px;padding:0 10px 0 5px;height:46px;border:1px solid var(--line);border-radius:15px}.status img{width:34px;height:34px;border-radius:11px}.dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 13px var(--green)}
+.brand{display:flex;align-items:center;gap:12px}.brand img{width:45px;height:45px;object-fit:contain;border-radius:14px}.brand-title{font-weight:800;letter-spacing:.16em;font-size:13px}.brand-sub{font-size:10px;color:var(--muted);margin-top:3px}.top-actions{display:flex;gap:9px}.icon-btn{width:46px;height:46px;border:1px solid var(--line);border-radius:15px;background:rgba(13,27,50,.7);color:var(--text);font-size:20px;display:grid;place-items:center}.status{display:flex;align-items:center;gap:8px;padding:0 10px 0 5px;height:46px;border:1px solid var(--line2);border-radius:15px;background:linear-gradient(145deg,rgba(8,25,49,.96),rgba(4,14,29,.96));box-shadow:inset 0 0 18px rgba(36,135,255,.08),0 8px 24px rgba(0,0,0,.22)}.status img{width:34px;height:34px;border-radius:11px}.dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 13px var(--green)}
 .hero{min-height:620px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:70px 10px 35px;position:relative}.hero:before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(52,133,255,.13),transparent 67%);filter:blur(4px)}.hero-logo{width:180px;height:180px;object-fit:contain;position:relative;filter:drop-shadow(0 15px 45px rgba(69,157,255,.25))}.eyebrow{margin-top:8px;color:#9ab7df;letter-spacing:.22em;font-size:13px}.hero h1{font-size:clamp(38px,6vw,68px);line-height:.98;max-width:850px;margin:22px 0 20px;letter-spacing:-.045em;text-transform:uppercase;background:linear-gradient(180deg,#fff,#a9c7f6);-webkit-background-clip:text;color:transparent}.hero p{max-width:760px;color:#9caac0;font-size:clamp(16px,2vw,22px);line-height:1.65;margin:0}.cta-row{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap;justify-content:center}.btn{border:1px solid var(--line2);background:rgba(18,39,70,.7);color:#fff;border-radius:18px;padding:16px 24px;font-weight:800;font-size:15px}.btn.primary{background:linear-gradient(135deg,#f3f7ff,#a9cbff);color:#07101f;border-color:#dceaff}
 .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:920px;width:100%;margin-top:38px}.feature{padding:23px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,rgba(15,30,55,.76),rgba(7,16,31,.65));text-align:left;min-height:132px}.feature .emoji{font-size:26px}.feature h3{margin:13px 0 5px;font-size:18px}.feature p{font-size:13px;line-height:1.4;color:var(--muted)}
 .section{display:none}.section.active{display:block}.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin:20px 0}.section-title{font-size:30px;margin:0}.section-sub{color:var(--muted);margin:7px 0 0}.segmented{display:flex;padding:4px;border:1px solid var(--line);border-radius:16px;background:rgba(6,15,28,.72)}.segmented button{border:0;background:transparent;color:var(--muted);padding:10px 18px;border-radius:12px;font-weight:800}.segmented button.active{color:#fff;background:rgba(63,139,255,.22);box-shadow:inset 0 0 0 1px rgba(91,159,255,.2)}
@@ -65,19 +65,19 @@ body{overflow-x:hidden;background-image:linear-gradient(rgba(80,145,220,.045) 1p
  justify-self:center;
  margin-top:-30px;
  border-radius:50%;
- background:linear-gradient(145deg,#ffffff 0%,#dcecff 58%,#a9c9f5 100%);
- color:#07101f;
- border:5px solid #07101f;
- box-shadow:0 0 0 1px rgba(121,183,255,.55),0 12px 34px rgba(36,135,255,.32),0 4px 14px rgba(0,0,0,.45);
+ background:linear-gradient(145deg,rgba(8,25,49,.98),rgba(4,14,29,.98));
+ color:#eaf3ff;
+ border:1px solid rgba(91,159,255,.78);
+ box-shadow:0 0 0 2px rgba(6,18,36,.96),0 0 0 3px rgba(67,151,255,.18),0 12px 34px rgba(36,135,255,.30),0 4px 14px rgba(0,0,0,.45),inset 0 0 22px rgba(36,135,255,.10);
  font-size:0;
  z-index:1002
 }
 .nav-chat::before{
  content:"";
- width:40px;
- height:40px;
- background:url("nexora-icon-192.png") center/contain no-repeat;
- filter:drop-shadow(0 3px 8px rgba(0,0,0,.22))
+ width:45px;
+ height:45px;
+ background:url("nexora-chat-logo.png") center/contain no-repeat;
+ filter:drop-shadow(0 0 9px rgba(74,156,255,.38))
 }
 .nav-chat::after{
  content:"";
@@ -99,7 +99,7 @@ body{overflow-x:hidden;background-image:linear-gradient(rgba(80,145,220,.045) 1p
 }
 @media(max-width:520px){
  .brand-title{font-size:11px}.brand-sub{display:none}.top-actions .icon-btn{display:none}.status{padding-right:7px}.hero{padding-left:3px;padding-right:3px}.hero h1{font-size:37px}.hero p{font-size:15px}.feature-grid{grid-template-columns:1fr 1fr}.feature{min-height:125px}.feature h3{font-size:15px}.feature p{font-size:11px}.section-title{font-size:25px}.panel{padding:13px}.segmented{width:100%}.segmented button{flex:1}.cards{grid-template-columns:1fr}.chat-main{border-radius:18px}.chat-head{padding:12px}
- .bottom-nav{width:calc(100% - 18px);height:74px;bottom:max(9px,env(safe-area-inset-bottom));border-radius:25px;padding:7px 6px}.nav-btn{height:58px;font-size:9px;border-radius:17px}.nav-btn img{width:21px;height:21px}.nav-chat{width:68px;height:68px;margin-top:-28px}.nav-chat::before{width:37px;height:37px}
+ .bottom-nav{width:calc(100% - 18px);height:74px;bottom:max(9px,env(safe-area-inset-bottom));border-radius:25px;padding:7px 6px}.nav-btn{height:58px;font-size:9px;border-radius:17px}.nav-btn img{width:21px;height:21px}.nav-chat{width:68px;height:68px;margin-top:-28px}.nav-chat::before{width:42px;height:42px}
 }
 html{scroll-behavior:smooth}body{padding-bottom:8px}
 
@@ -365,7 +365,7 @@ html{scroll-behavior:smooth}body{padding-bottom:8px}
 
 
 .admin-broadcast-item{padding:12px;border:1px solid var(--line);border-radius:14px;background:rgba(8,20,38,.76)}.admin-broadcast-item h5{margin:0 0 5px;font-size:12px}.admin-broadcast-item p{margin:0 0 8px;color:#aebdd1;font-size:11px;line-height:1.45}.admin-broadcast-actions{display:flex;gap:6px;flex-wrap:wrap}.status-pill{display:inline-flex;align-items:center;padding:3px 7px;border-radius:999px;border:1px solid var(--line);font-size:9px;color:#9fb5d3}.status-pill.archived{color:#aab3c1}.push-hint{font-size:10px;color:var(--muted);line-height:1.45;margin-top:7px}./* NEXORA CHAT FULLSCREEN — only active while Chat is open */
-.chat-back-btn{display:none;width:42px;height:42px;flex:none;border:1px solid var(--line);border-radius:13px;background:rgba(13,27,50,.78);color:#fff;font-size:30px;line-height:1;place-items:center;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.2)}
+.chat-back-btn{display:none;width:42px;height:42px;flex:none;border:1px solid var(--line);border-radius:13px;background:linear-gradient(145deg,rgba(8,25,49,.96),rgba(4,14,29,.96));color:#eaf3ff;font-size:30px;line-height:1;place-items:center;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.2)}
 body.chat-focus-mode{overflow:hidden}
 body.chat-focus-mode .app{max-width:none;width:100%;padding:0}
 body.chat-focus-mode .topbar{position:fixed;left:0;right:0;top:0;width:100%;max-width:none;height:72px;margin:0;border-radius:0;border-left:0;border-right:0;border-top:0;padding:10px 16px;z-index:2000}
