@@ -747,8 +747,118 @@ function setBackgroundAnimationStrength(value){const n=Math.max(0,Math.min(100,N
 function toggleBackgroundAnimation(enabled){setBackgroundAnimation(!!enabled);let savedStrength=60;try{const raw=localStorage.getItem("nexora_bg_animation_strength");if(raw!==null)savedStrength=Math.max(0,Math.min(100,Number(raw)||0));}catch(e){}applyBackgroundAnimationStrength(savedStrength);}
 function initBackgroundAnimation(){let saved=null,strength=null;try{saved=localStorage.getItem("nexora_bg_animation");strength=localStorage.getItem("nexora_bg_animation_strength");}catch(e){}const enabled=saved?saved==="on":true;const level=strength!==null?Math.max(0,Math.min(100,Number(strength)||0)):60;setBackgroundAnimation(enabled);applyBackgroundAnimationStrength(level);const toggle=document.getElementById("background-animation-toggle");if(toggle)toggle.checked=enabled;initNxCanvas();}
 const _nexoraOriginalOpenSettings=window.openSettings;window.openSettings=async function(){if(typeof _nexoraOriginalOpenSettings==="function")await _nexoraOriginalOpenSettings();const toggle=document.getElementById("background-animation-toggle");if(toggle)toggle.checked=document.body.classList.contains("nx-animations-on");let strength=60;try{const raw=localStorage.getItem("nexora_bg_animation_strength");if(raw!==null)strength=Math.max(0,Math.min(100,Number(raw)||0));}catch(e){}applyBackgroundAnimationStrength(strength);};
-function initNxCanvas(){const c=document.getElementById("nx-bg-canvas");if(!c||c.dataset.ready)return;c.dataset.ready="1";const ctx=c.getContext("2d");let w=0,h=0,dpr=1;const stars=[];const resize=()=>{dpr=Math.min(window.devicePixelRatio||1,2);w=window.innerWidth;h=window.innerHeight;c.width=w*dpr;c.height=h*dpr;c.style.width=w+"px";c.style.height=h+"px";ctx.setTransform(dpr,0,0,dpr,0,0);};resize();window.addEventListener("resize",resize,{passive:true});for(let i=0;i<55;i++)stars.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:.5+Math.random()*1.5,v:.08+Math.random()*.24,a:.18+Math.random()*.55,phase:Math.random()*Math.PI*2});let t=0;const draw=()=>{t+=.012;ctx.clearRect(0,0,w,h);const on=document.body.classList.contains("nx-animations-on");const strength=Math.max(0,Math.min(1,Number(getComputedStyle(document.documentElement).getPropertyValue("--nx-anim-strength"))||0));if(on&&strength>0){for(const s of stars){s.y-=s.v;if(s.y<-4)s.y=h+4;const pulse=s.a*(.55+.45*Math.sin(t*1.7+s.phase))*strength;ctx.beginPath();ctx.fillStyle=`rgba(93,171,255,${pulse})`;ctx.arc(s.x+Math.sin(t+s.phase)*8,s.y,s.r*(.65+strength*.7),0,Math.PI*2);ctx.fill();}ctx.save();ctx.translate(w*.5,h*.55);ctx.rotate(Math.sin(t*.28)*.035);ctx.strokeStyle=`rgba(67,157,255,${.12*strength})`;ctx.lineWidth=.8+strength*2.4;for(let r=0;r<4;r++){ctx.beginPath();ctx.arc(0,0,Math.min(w,h)*(0.22+r*.13)+Math.sin(t+r)*12*(.5+strength),0,Math.PI*2);ctx.stroke();}ctx.restore();}requestAnimationFrame(draw);};requestAnimationFrame(draw);}
-document.addEventListener("DOMContentLoaded",initBackgroundAnimation);
-</script>
+function initNxCanvas(){
+  const c=document.getElementById("nx-bg-canvas");
+  if(!c||c.dataset.ready)return;
+  c.dataset.ready="1";
+  const ctx=c.getContext("2d");
+  let w=0,h=0,dpr=1,t=0;
+  const particles=[];
+  const streaks=[];
+  const resize=()=>{
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    w=window.innerWidth; h=window.innerHeight;
+    c.width=w*dpr; c.height=h*dpr;
+    c.style.width=w+"px"; c.style.height=h+"px";
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  };
+  resize();
+  window.addEventListener("resize",resize,{passive:true});
+  for(let i=0;i<95;i++) particles.push({
+    x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+    r:.35+Math.random()*1.8,v:.08+Math.random()*.34,
+    drift:.2+Math.random()*.7,a:.2+Math.random()*.7,
+    phase:Math.random()*Math.PI*2
+  });
+  for(let i=0;i<9;i++) streaks.push({
+    x:Math.random()*1.35-0.15,y:Math.random()*1.25-.1,
+    len:.16+Math.random()*.26,s:.00055+Math.random()*.0011,
+    phase:Math.random()*Math.PI*2,tilt:-.18+Math.random()*.36
+  });
+  const draw=()=>{
+    t+=.006;
+    ctx.clearRect(0,0,w,h);
+    const on=document.body.classList.contains("nx-animations-on");
+    const strength=Math.max(0,Math.min(1,Number(getComputedStyle(document.documentElement).getPropertyValue("--nx-anim-strength"))||0));
+    if(on&&strength>0){
+      /* Large cinematic ambient glows */
+      const glow=(x,y,r,inner,outer)=>{
+        const g=ctx.createRadialGradient(x,y,0,x,y,r);
+        g.addColorStop(0,`rgba(35,125,255,${inner*strength})`);
+        g.addColorStop(.28,`rgba(18,105,255,${inner*.62*strength})`);
+        g.addColorStop(.68,`rgba(0,80,220,${outer*strength})`);
+        g.addColorStop(1,"rgba(0,40,140,0)");
+        ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();
+      };
+      glow(w*.08+Math.sin(t*.34)*w*.09,h*.18+Math.cos(t*.27)*h*.07,Math.max(w,h)*.42,.34,.15);
+      glow(w*.92+Math.cos(t*.29)*w*.10,h*.38+Math.sin(t*.23)*h*.11,Math.max(w,h)*.45,.30,.12);
+      glow(w*.50+Math.sin(t*.18)*w*.12,h*.88+Math.cos(t*.25)*h*.08,Math.max(w,h)*.38,.24,.10);
+
+      /* Futuristic drifting grid */
+      ctx.save();
+      ctx.globalAlpha=.16*strength;
+      ctx.strokeStyle="#4da5ff";ctx.lineWidth=.7;
+      const grid=44,ox=(t*13)%grid,oy=(t*9)%grid;
+      for(let x=-grid+ox;x<w+grid;x+=grid){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+      for(let y=-grid+oy;y<h+grid;y+=grid){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+      ctx.restore();
+
+      /* Floating particles */
+      for(const p of particles){
+        p.y-=p.v*(.65+.7*strength);
+        p.x+=Math.sin(t*.7+p.phase)*p.drift*.32;
+        if(p.y<-8){p.y=h+8;p.x=Math.random()*w;}
+        if(p.x<-8)p.x=w+8;if(p.x>w+8)p.x=-8;
+        const pulse=p.a*(.52+.48*Math.sin(t*1.8+p.phase))*strength;
+        ctx.fillStyle=`rgba(113,190,255,${pulse})`;
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r*(.7+strength*.9),0,Math.PI*2);ctx.fill();
+        if(p.r>1.45&&strength>.35){ctx.strokeStyle=`rgba(94,173,255,${pulse*.45})`;ctx.lineWidth=.6;ctx.beginPath();ctx.moveTo(p.x-4,p.y);ctx.lineTo(p.x+4,p.y);ctx.moveTo(p.x,p.y-4);ctx.lineTo(p.x,p.y+4);ctx.stroke();}
+      }
+
+      /* Moving energy/light streaks */
+      ctx.save();ctx.globalCompositeOperation="screen";
+      for(const q of streaks){
+        q.x+=q.s*(.75+.8*strength);
+        if(q.x>1.25)q.x=-.25;
+        const x=q.x*w,y=q.y*h+Math.sin(t*.5+q.phase)*h*.05;
+        const len=q.len*w*(.65+.7*strength);
+        const dx=Math.cos(q.tilt)*len,dy=Math.sin(q.tilt)*len;
+        const g=ctx.createLinearGradient(x-dx,y-dy,x+dx,y+dy);
+        g.addColorStop(0,"rgba(50,135,255,0)");
+        g.addColorStop(.5,`rgba(84,183,255,${.8*strength})`);
+        g.addColorStop(.62,`rgba(173,224,255,${.42*strength})`);
+        g.addColorStop(1,"rgba(40,120,255,0)");
+        ctx.strokeStyle=g;ctx.lineWidth=1.2+2.4*strength;ctx.shadowBlur=14+20*strength;ctx.shadowColor="#168cff";
+        ctx.beginPath();ctx.moveTo(x-dx,y-dy);ctx.lineTo(x+dx,y+dy);ctx.stroke();
+      }
+      ctx.restore();
+
+      /* Large orbital arcs */
+      ctx.save();
+      ctx.translate(w*.5,h*.48);
+      ctx.rotate(Math.sin(t*.12)*.08);
+      ctx.globalAlpha=.55*strength;
+      ctx.shadowBlur=18;ctx.shadowColor="#168cff";
+      for(let i=0;i<5;i++){
+        const rx=Math.max(w,h)*(.34+i*.075),ry=rx*(.22+.025*i);
+        const start=t*(.025+i*.008)+i*.75;
+        ctx.strokeStyle=`rgba(48,143,255,${.16-.018*i})`;
+        ctx.lineWidth=1.2+strength*1.8;
+        ctx.beginPath();ctx.ellipse(0,0,rx,ry,0,start,start+Math.PI*(.82+.08*Math.sin(t+i)));ctx.stroke();
+      }
+      ctx.restore();
+
+      /* Ambient pulse */
+      const pulse=.5+.5*Math.sin(t*.75);
+      ctx.save();
+      ctx.globalAlpha=(.06+.07*pulse)*strength;
+      const pg=ctx.createRadialGradient(w*.5,h*.48,Math.min(w,h)*.08,w*.5,h*.48,Math.max(w,h)*.62);
+      pg.addColorStop(0,"rgba(58,154,255,1)");pg.addColorStop(.45,"rgba(20,100,255,.45)");pg.addColorStop(1,"rgba(0,30,100,0)");
+      ctx.fillStyle=pg;ctx.fillRect(0,0,w,h);ctx.restore();
+    }
+    requestAnimationFrame(draw);
+  };
+  requestAnimationFrame(draw);
+}</script>
 </body>
 </html>
