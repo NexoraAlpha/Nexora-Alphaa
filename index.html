@@ -895,8 +895,9 @@ async function loadInbox(){
   const box=document.getElementById("inbox-list");if(!box)return;
   if(!currentUser){box.innerHTML='<div class="chat-empty">Login untuk melihat pesan.</div>';return;}
   const {data,error}=await supabaseClient.from("direct_messages").select("id,sender_id,receiver_id,body,created_at,read_at").or(`sender_id.eq.${currentUser.id},receiver_id.eq.${currentUser.id}`).order("created_at",{ascending:false}).limit(150);
-  if(error){box.innerHTML='<div class="chat-empty">Belum ada percakapan pribadi.</div><div class="inbox-hint">Mulai chat dari tombol ＋ untuk menghubungi member Nexora.</div>';return;}
-  const latest=new Map();(data||[]).forEach(m=>{const other=m.sender_id===currentUser.id?m.receiver_id:m.sender_id;if(!latest.has(other))latest.set(other,m);});
+  const latest=new Map();
+  if(!error){(data||[]).forEach(m=>{const other=m.sender_id===currentUser.id?m.receiver_id:m.sender_id;if(!latest.has(other))latest.set(other,m);});}
+  window.__nexoraDMTableError=error?.message||null;
   renderInbox(latest);
 }
 function renderInbox(latestMap){
