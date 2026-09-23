@@ -795,10 +795,6 @@ async function shareMyProfile(){
 }
 async function openSharedProfile(token){
   if(!token)return false;
-  if(!currentUser){
-    localStorage.setItem("nexora_pending_profile_token",token);
-    return false;
-  }
   try{
     const {data,error}=await supabaseClient.rpc("resolve_profile_share_link",{token});
     if(error)throw error;
@@ -1193,7 +1189,7 @@ async function closePoll(id,closed){if(currentProfile?.role!=="ADMIN")return;con
 function subscribeRealtime(){if(chatChannel)return;chatChannel=supabaseClient.channel("nexora-community-realtime").on("postgres_changes",{event:"*",schema:"public",table:"messages"},()=>{loadMessages();loadPinnedMessage();}).on("postgres_changes",{event:"*",schema:"public",table:"reactions"},()=>loadMessages()).on("postgres_changes",{event:"*",schema:"public",table:"profiles"},()=>{loadMembers();if(currentUser){loadProfile();loadInbox();}}).on("postgres_changes",{event:"*",schema:"public",table:"community_polls"},()=>loadCommunityPolls()).on("postgres_changes",{event:"*",schema:"public",table:"community_poll_options"},()=>loadCommunityPolls()).on("postgres_changes",{event:"*",schema:"public",table:"community_poll_votes"},()=>loadCommunityPolls()).on("postgres_changes",{event:"*",schema:"public",table:"notifications"},payload=>{if(currentUser&&payload.new?.user_id===currentUser.id){loadUnreadCount();if(document.getElementById("notifications-modal").style.display!=="none")loadNotifications();}}).subscribe(status=>{const el=document.getElementById("realtime-status");if(status==="SUBSCRIBED"){el.textContent="● REALTIME ACTIVE";el.style.color="var(--green)";}else if(status==="CHANNEL_ERROR"||status==="TIMED_OUT"){el.textContent="● REALTIME ERROR";el.style.color="var(--danger)";}});}
 
 
-supabaseClient.auth.getSession().then(async ({data})=>{currentUser=data.session?.user||null;await loadProfile();updateAuthStatus();const input=document.getElementById("message-input"),send=document.getElementById("send-btn");input.disabled=!currentUser;send.disabled=!currentUser;if(currentUser){await loadCommunity();startLastSeenHeartbeat();await ensurePushSubscription();await loadInbox();if(new URLSearchParams(location.search).get("open")==="notifications")setTimeout(openNotifications,300);setTimeout(handlePendingSharedProfile,150);}else document.getElementById("messages").innerHTML='<div class="chat-empty">Login untuk masuk ke Community Realtime.</div>';await loadAcademy();subscribeRealtime();});
+supabaseClient.auth.getSession().then(async ({data})=>{currentUser=data.session?.user||null;await loadProfile();updateAuthStatus();const input=document.getElementById("message-input"),send=document.getElementById("send-btn");input.disabled=!currentUser;send.disabled=!currentUser;if(currentUser){await loadCommunity();startLastSeenHeartbeat();await ensurePushSubscription();await loadInbox();if(new URLSearchParams(location.search).get("open")==="notifications")setTimeout(openNotifications,300);}else document.getElementById("messages").innerHTML='<div class="chat-empty">Login untuk masuk ke Community Realtime.</div>';setTimeout(handlePendingSharedProfile,250);await loadAcademy();subscribeRealtime();});
 supabaseClient.auth.onAuthStateChange((_event,session)=>{setTimeout(async()=>{currentUser=session?.user||null;await loadProfile();const input=document.getElementById("message-input"),send=document.getElementById("send-btn");input.disabled=!currentUser;send.disabled=!currentUser;if(currentUser){await loadCommunity();startLastSeenHeartbeat();await loadAcademy();await ensurePushSubscription();await loadInbox();closeModal("auth-modal");setTimeout(handlePendingSharedProfile,150);}else{await loadAcademy();document.getElementById("messages").innerHTML='<div class="chat-empty">Login untuk masuk ke Community Realtime.</div>';updateNotifyDot(false);} },0);});
 </script>
 
