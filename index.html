@@ -1198,6 +1198,44 @@ function academyNormalizeHtmlSource(value){
 function academyIsFullHtmlDocument(value){
   return /^(?:<!doctype\s+html\b|<html(?:\s|>))/i.test(String(value||"").trim());
 }
+function academyNexoraThemeHtml(source){
+  const raw=String(source||"").trim();
+  const theme=`
+<style id="nexora-academy-theme">
+:root{color-scheme:dark;--nx-bg:#061225;--nx-panel:rgba(7,22,42,.78);--nx-panel2:rgba(10,31,57,.72);--nx-line:rgba(94,160,255,.22);--nx-text:#eaf3ff;--nx-muted:#9fb2cd;--nx-accent:#69b7ff;--nx-accent2:#59f0c1;--nx-shadow:0 18px 55px rgba(0,0,0,.28)}
+html{background:transparent!important;scroll-behavior:smooth}
+body{margin:0!important;padding:22px!important;box-sizing:border-box;background:transparent!important;color:var(--nx-text)!important;font-family:Inter,Arial,sans-serif!important;font-size:16px!important;line-height:1.75!important;-webkit-font-smoothing:antialiased}
+body *{box-sizing:border-box}
+main,article,section,.container,.content,.wrapper{max-width:980px;margin-left:auto;margin-right:auto}
+h1,h2,h3,h4,h5,h6{color:#f5f9ff!important;line-height:1.22!important;letter-spacing:-.02em}
+h1{font-size:clamp(30px,5vw,46px)!important;margin:0 0 16px!important}
+h2{font-size:clamp(24px,4vw,34px)!important;margin:34px 0 13px!important}
+h3{font-size:clamp(20px,3vw,27px)!important;margin:27px 0 10px!important}
+p,li,dd{color:var(--nx-text)!important}
+p{margin:0 0 18px!important}
+small{color:var(--nx-muted)!important}
+a{color:var(--nx-accent)!important;text-decoration:none}
+a:hover{text-decoration:underline}
+section,article,.card,.box,.panel,.callout,.note,.lesson,.content-card{background:linear-gradient(145deg,var(--nx-panel),rgba(5,15,30,.62));border:1px solid var(--nx-line);border-radius:20px;box-shadow:var(--nx-shadow);padding:22px}
+img{max-width:100%;height:auto;border-radius:16px}
+hr{border:0;border-top:1px solid var(--nx-line);margin:28px 0}
+blockquote{margin:22px 0;padding:15px 18px;border-left:3px solid var(--nx-accent);border-radius:12px;background:rgba(72,145,235,.08);color:#cfe0f7}
+pre,code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+pre{overflow:auto;padding:16px;border-radius:14px;background:rgba(1,8,20,.82);border:1px solid var(--nx-line);color:#d9ecff}
+code{padding:2px 6px;border-radius:7px;background:rgba(83,153,232,.12);color:#bfe2ff}
+table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:14px;background:rgba(4,15,30,.58)}
+th,td{padding:11px 13px;border:1px solid var(--nx-line);text-align:left}
+th{color:#f4f8ff;background:rgba(70,133,220,.12)}
+button{font:inherit;border-radius:12px;border:1px solid var(--nx-line);background:linear-gradient(145deg,rgba(22,55,91,.9),rgba(8,24,45,.9));color:#f4f8ff;padding:10px 16px;cursor:pointer}
+button:hover{border-color:rgba(105,183,255,.55);transform:translateY(-1px)}
+ul,ol{padding-left:25px}
+::selection{background:rgba(89,240,193,.24)}
+@media(max-width:600px){body{padding:16px!important;font-size:15px!important}section,article,.card,.box,.panel,.callout,.note,.lesson,.content-card{padding:17px;border-radius:17px}}
+</style>`;
+  if(/<\/head>/i.test(raw)) return raw.replace(/<\/head>/i,theme+"</head>");
+  if(/<body(?:\s[^>]*)?>/i.test(raw)) return raw.replace(/<body(?:\s[^>]*)?>/i,m=>m+theme);
+  return theme+raw;
+}
 function academyRenderContent(container,value){
   const raw=academyNormalizeHtmlSource(value);
   container.innerHTML="";
@@ -1207,7 +1245,7 @@ function academyRenderContent(container,value){
     frame.className="academy-html-frame";
     frame.title="Nexora Academy";
     frame.setAttribute("sandbox","allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox");
-    frame.srcdoc=raw;
+    frame.srcdoc=academyNexoraThemeHtml(raw);
     container.appendChild(frame);
   }else{
     container.innerHTML=raw;
