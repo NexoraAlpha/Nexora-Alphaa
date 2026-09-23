@@ -716,42 +716,10 @@ function memberRow(p){const online=onlineIds.has(p.id);return `<div class="membe
 function renderAllMembers(){const q=(document.getElementById("member-search-input")?.value||"").trim().toLowerCase();const list=allMembers.filter(p=>!q||(p.display_name||"").toLowerCase().includes(q)||(p.username||"").toLowerCase().includes(q));document.getElementById("all-members-list").innerHTML=list.map(memberRow).join("")||'<div class="chat-empty">Member tidak ditemukan.</div>';}
 function openMemberList(){if(!currentUser)return openAuth();renderAllMembers();openModal("member-list-modal");}
 async function openMemberProfile(id){const p=allMembers.find(x=>x.id===id)|| (await supabaseClient.from("profiles").select("*").eq("id",id).single()).data;if(!p)return;selectedMember=p;setProfileAvatarEl(document.getElementById("member-avatar"),p);document.getElementById("member-name").textContent=p.display_name||p.username;document.getElementById("member-role").textContent=roleLabel(p.role||"MEMBER");document.getElementById("member-online").textContent=onlineIds.has(p.id)?"Online":"Offline";document.getElementById("member-online").className=onlineIds.has(p.id)?"member-online-label":"member-offline-label";document.getElementById("member-bio").textContent=p.bio||"Belum ada bio.";document.getElementById("member-role-stat").textContent=p.role||"MEMBER";document.getElementById("member-joined").textContent=new Date(p.created_at).toLocaleDateString("id-ID",{day:"2-digit",month:"short",year:"numeric"});const c=await supabaseClient.from("messages").select("id",{count:"exact",head:true}).eq("user_id",p.id);document.getElementById("member-posts").textContent=c.count??0;document.getElementById("member-dm-btn").style.display=currentUser&&currentUser.id!==p.id?"inline-block":"none";const isStaff=["ADMIN","MOD"].includes(currentProfile?.role);document.getElementById("member-admin-actions").style.display=isStaff&&p.id!==currentUser.id?"block":"none";document.getElementById("member-role-select").value=p.role||"MEMBER";openModal("member-modal");}
-async function changeMemberRole(){
-  if(!selectedMember)return;
-  const role=document.getElementById("member-role-select").value;
-  const {data,error}=await supabaseClient.rpc("admin_set_member_role",{target_user_id:selectedMember.id,new_role:role});
-  if(error)return alert(error.message);
-  selectedMember={...selectedMember,role:data?.role||role};
-  document.getElementById("member-role").textContent=roleLabel(selectedMember.role);
-  document.getElementById("member-role-stat").textContent=selectedMember.role;
-  alert("Role tersimpan.");
-  await loadMembers();
-  closeModal("member-modal");
-}
-async function muteMember(minutes){
-  if(!selectedMember)return;
-  const {data,error}=await supabaseClient.rpc("admin_set_member_mute",{target_user_id:selectedMember.id,mute_minutes:minutes});
-  if(error)return alert(error.message);
-  selectedMember={...selectedMember,muted_until:data?.muted_until||new Date(Date.now()+minutes*60000).toISOString()};
-  alert("Member dimute.");
-  await loadMembers();
-}
-async function banMember(){
-  if(!selectedMember)return;
-  const {data,error}=await supabaseClient.rpc("admin_ban_member",{target_user_id:selectedMember.id});
-  if(error)return alert(error.message);
-  selectedMember={...selectedMember,banned_until:data?.banned_until||new Date(Date.now()+7*86400000).toISOString()};
-  alert("Member diban 7 hari.");
-  await loadMembers();
-}
-async function unbanMember(){
-  if(!selectedMember)return;
-  const {data,error}=await supabaseClient.rpc("admin_unban_member",{target_user_id:selectedMember.id});
-  if(error)return alert(error.message);
-  selectedMember={...selectedMember,banned_until:null,muted_until:null};
-  alert("Ban/mute dicabut.");
-  await loadMembers();
-}
+async function changeMemberRole(){if(!selectedMember)return;const role=document.getElementById("member-role-select").value;const {error}=await supabaseClient.from("profiles").update({role,updated_at:new Date().toISOString()}).eq("id",selectedMember.id);if(error)return alert(error.message);alert("Role tersimpan.");await loadMembers();closeModal("member-modal");}
+async function muteMember(minutes){if(!selectedMember)return;const until=new Date(Date.now()+minutes*60000).toISOString();const {error}=await supabaseClient.from("profiles").update({muted_until:until,updated_at:new Date().toISOString()}).eq("id",selectedMember.id);if(error)return alert(error.message);alert("Member dimute.");}
+async function banMember(){if(!selectedMember)return;const until=new Date(Date.now()+7*86400000).toISOString();const {error}=await supabaseClient.from("profiles").update({banned_until:until,updated_at:new Date().toISOString()}).eq("id",selectedMember.id);if(error)return alert(error.message);alert("Member diban 7 hari.");}
+async function unbanMember(){if(!selectedMember)return;const {error}=await supabaseClient.from("profiles").update({banned_until:null,muted_until:null,updated_at:new Date().toISOString()}).eq("id",selectedMember.id);if(error)return alert(error.message);alert("Ban/mute dicabut.");}
 
 async function openNotifications(){if(!currentUser)return openAuth();const adminBtn=document.getElementById("admin-notification-manage-btn");if(adminBtn)adminBtn.style.display=currentProfile?.role==="ADMIN"?"inline-flex":"none";await loadNotifications();openModal("notifications-modal");}
 async function loadNotifications(){const box=document.getElementById("notifications-list");const {data,error}=await supabaseClient.from("notifications").select("id,type,title,body,read_at,created_at,archived_at,actor_id,profiles!notifications_actor_id_fkey(display_name,username)").eq("user_id",currentUser.id).is("archived_at",null).order("created_at",{ascending:false}).limit(50);if(error){box.innerHTML='<div class="chat-empty">'+esc(error.message)+"</div>";return;}box.innerHTML=(data||[]).map(n=>`<div class="notification-item ${n.read_at?"":"unread"}" onclick="markNotificationRead(${n.id})"><b>${esc(n.title)}</b><p>${esc(n.body)}</p><small>${new Date(n.created_at).toLocaleString("id-ID")}</small></div>`).join("")||'<div class="chat-empty">Belum ada notifikasi.</div>';updateNotifyDot((data||[]).some(n=>!n.read_at));}
@@ -767,10 +735,67 @@ function jumpToMessage(id){closeModal("search-modal");go("chat");setTimeout(()=>
 async function openSettings(){const adminSection=document.getElementById("admin-settings-section");if(adminSection)adminSection.style.display=currentProfile?.role==="ADMIN"?"block":"none";updateNotificationPermissionUI();openModal("settings-modal");}
 function updateNotificationPermissionUI(){const status=document.getElementById("notification-permission-status"),btn=document.getElementById("notification-permission-btn");if(!status||!btn)return;if(!window.isSecureContext||!("Notification" in window)||!("serviceWorker" in navigator)||!("PushManager" in window)){status.textContent="Push notification belum didukung penuh di browser/perangkat ini.";btn.disabled=true;return;}const p=Notification.permission;if(p==="granted"){status.textContent="Notifikasi aktif untuk perangkat ini.";btn.textContent="Notifikasi Aktif ✓";btn.disabled=false;}else if(p==="denied"){status.textContent="Izin notifikasi ditolak. Aktifkan kembali dari pengaturan browser/perangkat.";btn.textContent="Izin Ditolak";btn.disabled=true;}else{status.textContent="Belum diizinkan. Tekan tombol untuk meminta izin.";btn.textContent="Izinkan Notifikasi";btn.disabled=false;}}
 function urlBase64ToUint8Array(base64String){const padding="=".repeat((4-base64String.length%4)%4),base64=(base64String+padding).replace(/-/g,"+").replace(/_/g,"/");const rawData=atob(base64);return Uint8Array.from([...rawData].map(c=>c.charCodeAt(0)));}
-async function registerPushWorker(){return navigator.serviceWorker.register("/sw.js",{scope:"/"});}
-async function savePushSubscription(sub){if(!currentUser||!sub)return;const j=sub.toJSON();const keys=j.keys||{};const {error}=await supabaseClient.rpc("save_push_subscription",{p_endpoint:j.endpoint,p_p256dh:keys.p256dh||"",p_auth:keys.auth||""});if(error)throw error;}
-async function requestNotificationPermission(){if(!currentUser)return openAuth();if(!window.isSecureContext||!("Notification" in window)||!("serviceWorker" in navigator)||!("PushManager" in window))return alert("Push notification belum didukung di browser ini.");const permission=await Notification.requestPermission();updateNotificationPermissionUI();if(permission!=="granted")return;if(!NEXORA_VAPID_PUBLIC_KEY)return alert("Push notification belum dikonfigurasi.");try{const reg=await registerPushWorker();let sub=await reg.pushManager.getSubscription();if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlBase64ToUint8Array(NEXORA_VAPID_PUBLIC_KEY)});await savePushSubscription(sub);alert("Notifikasi Nexora sudah aktif di perangkat ini ✓");}catch(e){console.error(e);alert("Gagal mengaktifkan notifikasi: "+(e?.message||e));}}
-async function ensurePushSubscription(){if(!currentUser||!window.isSecureContext||!("Notification" in window)||Notification.permission!=="granted"||!("serviceWorker" in navigator)||!("PushManager" in window))return;try{const reg=await registerPushWorker();let sub=await reg.pushManager.getSubscription();if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlBase64ToUint8Array(NEXORA_VAPID_PUBLIC_KEY)});await savePushSubscription(sub);}catch(e){console.warn("Push subscription:",e);}}
+async function registerPushWorker(){
+  if(!("serviceWorker" in navigator)) throw new Error("Service Worker tidak didukung browser ini.");
+  const reg=await navigator.serviceWorker.register("/sw.js",{scope:"/",updateViaCache:"none"});
+  try{await reg.update();}catch(_){}
+  await navigator.serviceWorker.ready;
+  return reg;
+}
+async function savePushSubscription(sub){
+  if(!currentUser||!sub)return;
+  const j=sub.toJSON();
+  const keys=j.keys||{};
+  const {error}=await supabaseClient.rpc("save_push_subscription",{
+    p_endpoint:j.endpoint,
+    p_p256dh:keys.p256dh||"",
+    p_auth:keys.auth||""
+  });
+  if(error)throw error;
+}
+async function createFreshPushSubscription(reg){
+  let sub=await reg.pushManager.getSubscription();
+  if(sub){
+    try{await sub.unsubscribe();}catch(_){}
+    sub=null;
+  }
+  return reg.pushManager.subscribe({
+    userVisibleOnly:true,
+    applicationServerKey:urlBase64ToUint8Array(NEXORA_VAPID_PUBLIC_KEY)
+  });
+}
+async function requestNotificationPermission(){
+  if(!currentUser)return openAuth();
+  if(!window.isSecureContext||!("Notification" in window)||!("serviceWorker" in navigator)||!("PushManager" in window))
+    return alert("Push notification belum didukung di browser ini.");
+  const permission=await Notification.requestPermission();
+  updateNotificationPermissionUI();
+  if(permission!=="granted")return;
+  if(!NEXORA_VAPID_PUBLIC_KEY)return alert("Push notification belum dikonfigurasi.");
+  try{
+    const reg=await registerPushWorker();
+    const sub=await createFreshPushSubscription(reg);
+    await savePushSubscription(sub);
+    alert("Notifikasi Nexora sudah aktif di perangkat ini ✓");
+  }catch(e){
+    console.error(e);
+    alert("Gagal mengaktifkan notifikasi: "+(e?.message||e));
+  }
+}
+async function ensurePushSubscription(){
+  if(!currentUser||!window.isSecureContext||!("Notification" in window)||Notification.permission!=="granted"||!("serviceWorker" in navigator)||!("PushManager" in window))return;
+  try{
+    const reg=await registerPushWorker();
+    let sub=await reg.pushManager.getSubscription();
+    if(!sub){
+      sub=await reg.pushManager.subscribe({
+        userVisibleOnly:true,
+        applicationServerKey:urlBase64ToUint8Array(NEXORA_VAPID_PUBLIC_KEY)
+      });
+    }
+    await savePushSubscription(sub);
+  }catch(e){console.warn("Push subscription:",e);}
+}
 function adminPanelView(view){const panels={notifications:"admin-panel-notifications",members:"admin-panel-members",pinned:"admin-panel-pinned"};Object.values(panels).forEach(id=>{const el=document.getElementById(id);if(el)el.hidden=true;});if(view==="home")return;if(panels[view])document.getElementById(panels[view]).hidden=false;}
 async function openAdminPanel(){if(currentProfile?.role!=="ADMIN"){return alert("Admin only.");}await Promise.all([loadAdminMembers(),loadAdminBroadcasts()]);openModal("admin-modal");adminPanelView("home");}
 function resetAnnouncementForm(){document.getElementById("announcement-broadcast-id").value="";document.getElementById("announcement-title").value="";document.getElementById("announcement-body").value="";document.getElementById("announcement-save-btn").textContent="Kirim";document.getElementById("announcement-cancel-edit").style.display="none";}
