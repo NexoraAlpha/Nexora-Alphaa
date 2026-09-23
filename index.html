@@ -814,7 +814,17 @@ async function openSharedProfile(token){
 async function handlePendingSharedProfile(){
   const params=new URLSearchParams(location.search);
   const token=params.get("profile")||localStorage.getItem("nexora_pending_profile_token");
-  if(!token||!currentUser)return;
+  if(!token)return;
+  if(!currentUser){
+    localStorage.setItem("nexora_pending_profile_token",token);
+    if(params.get("profile")){
+      params.delete("profile");
+      const clean=location.pathname+(params.toString()?`?${params.toString()}`:"")+location.hash;
+      history.replaceState({},"",clean);
+    }
+    openAuth();
+    return false;
+  }
   localStorage.removeItem("nexora_pending_profile_token");
   const opened=await openSharedProfile(token);
   if(params.get("profile")){
