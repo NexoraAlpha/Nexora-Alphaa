@@ -1,4 +1,4 @@
-# Nexora Alpha v2 — UI Preview
+# Nexora Alpha
 
 UI-only prototype. No login, Supabase, API, database, service worker, or realtime backend is enabled.
 
