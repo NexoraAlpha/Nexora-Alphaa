@@ -969,74 +969,6 @@ select:focus{
   font-size:10px;font-weight:900;letter-spacing:.07em;
 }
 .ai-terminal-live span{width:7px;height:7px;border-radius:50%;background:#43e5ad;box-shadow:0 0 11px #43e5ad}
-.ai-terminal-toolbar{
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:0 18px 13px;flex-wrap:wrap;
-}
-.ai-terminal-time{
-  font-size:10px;color:#8ea1bc;
-}
-.ai-terminal-refresh{
-  border:1px solid rgba(96,163,255,.32)!important;
-  border-radius:999px!important;
-  padding:8px 12px!important;
-  background:rgba(55,126,255,.10)!important;
-  color:#b8d4ff!important;
-  font-size:10px!important;
-}
-.ai-terminal-chart{
-  margin:0 10px 12px;
-  border:1px solid rgba(78,158,255,.34);
-  border-radius:25px;
-  overflow:hidden;
-  position:relative;
-  min-height:350px;
-  background:#020817;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 28px rgba(45,130,255,.08);
-}
-.ai-terminal-chart-widget{
-  position:absolute;inset:0;
-}
-.ai-terminal-chart-widget .tradingview-widget-container,
-.ai-terminal-chart-widget .tradingview-widget-container__widget{
-  width:100%!important;height:100%!important;
-}
-.ai-terminal-chart-overlay{
-  position:absolute;inset:0;pointer-events:none;z-index:5;
-}
-.ai-level{
-  position:absolute;left:8px;right:8px;height:0;border-top:1px dashed;
-  display:flex;justify-content:flex-end;align-items:flex-start;
-}
-.ai-level span{
-  transform:translateY(-50%);
-  padding:4px 7px;border-radius:8px;
-  font-size:9px;font-weight:950;letter-spacing:.02em;
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-}
-.ai-level.entry{border-color:#4aa6ff}
-.ai-level.entry span{color:#bfe0ff;background:rgba(30,116,221,.28);border:1px solid rgba(82,170,255,.42)}
-.ai-level.sl{border-color:#ff4f72}
-.ai-level.sl span{color:#ff91a5;background:rgba(213,38,76,.25);border:1px solid rgba(255,82,111,.40)}
-.ai-level.tp{border-color:#24e4b1}
-.ai-level.tp span{color:#69efc8;background:rgba(15,174,129,.22);border:1px solid rgba(44,231,181,.40)}
-.ai-level.current{border-color:#ad66ff}
-.ai-level.current span{color:#d4aaff;background:rgba(121,55,208,.26);border:1px solid rgba(176,105,255,.38)}
-.ai-timeframe-strip{
-  position:absolute;left:12px;top:10px;z-index:6;
-  display:flex;gap:6px;
-}
-.ai-timeframe-strip span{
-  padding:5px 8px;border-radius:9px;
-  font-size:9px;color:#8295b2;
-  border:1px solid rgba(100,157,230,.13);
-  background:rgba(2,10,24,.48);
-}
-.ai-timeframe-strip span.active{
-  color:#a9dcff;border-color:rgba(64,187,255,.48);
-  box-shadow:0 0 15px rgba(50,173,255,.18);
-  background:rgba(29,116,190,.22);
-}
 .ai-signal-summary{
   margin:0 10px 10px;
   border:1px solid rgba(95,159,255,.27);
@@ -1143,9 +1075,7 @@ select:focus{
 }
 @media(max-width:720px){
   .ai-terminal{border-radius:24px}
-  .ai-terminal-chart{min-height:330px;margin:0 7px 10px;border-radius:20px}
   .ai-terminal-head{padding:14px 13px 9px}
-  .ai-terminal-toolbar{padding:0 13px 10px}
   .ai-signal-summary{margin:0 7px 8px;border-radius:20px}
   .ai-reasoning{margin:0 7px 10px;border-radius:20px}
   .ai-price-cell{padding:11px 6px}
@@ -1156,6 +1086,8 @@ select:focus{
   .ai-decision-big{font-size:25px}
 }
 
+
+.ai-terminal-time-only{margin:0 0 14px;color:#91a7c6;font-size:13px;line-height:1.5;padding:0 4px;}
 </style>
 </head>
 <body><div id="nx-bg-motion" aria-hidden="true"><canvas id="nx-bg-canvas"></canvas><span class="nx-motion-glow one"></span><span class="nx-motion-glow two"></span><span class="nx-motion-glow three"></span><span class="nx-light-streak s1"></span><span class="nx-light-streak s2"></span><span class="nx-light-streak s3"></span><span class="nx-light-streak s4"></span><span class="nx-light-streak s5"></span></div>
@@ -1938,7 +1870,7 @@ function aiSignalCard(x,admin=false){
   const invalidation=aiEsc(x.invalidation||"Tidak ada invalidation yang diberikan.");
   const correction=x.correction?aiEsc(x.correction):"Tidak ada koreksi thesis saat ini.";
   return `
-  <article class="ai-terminal" data-ai-terminal="${safeId}" data-tv-symbol="${aiEsc(tvSymbol)}" data-tv-interval="${aiEsc(timeframe)}">
+  <article class="ai-terminal" data-ai-terminal="${safeId}" data-tv-symbol="${aiEsc(tvSymbol)}" data-tv-interval="${aiEsc(timeframe)}" data-signal-json="${encodeURIComponent(JSON.stringify(x))}">
     <div class="ai-terminal-head">
       <div class="ai-terminal-brand">
         <div class="ai-terminal-orb">▣</div>
@@ -1946,22 +1878,7 @@ function aiSignalCard(x,admin=false){
       </div>
       <span class="ai-terminal-live"><span></span>${x.is_published?"LIVE SIGNAL":"AI PREVIEW"}</span>
     </div>
-    <div class="ai-terminal-toolbar">
-      <div class="ai-terminal-time">${x.created_at?new Date(x.created_at).toLocaleString("id-ID"):"Test result"} · ${aiEsc(setup)}</div>
-      <button class="ai-terminal-refresh" type="button" onclick="refreshAIChart('${safeId}')">↻ Refresh Chart</button>
-    </div>
-    <div class="ai-terminal-chart" id="ai-chart-${safeId}">
-      <div class="ai-terminal-chart-widget" id="ai-chart-widget-${safeId}"></div>
-      <div class="ai-timeframe-strip">
-        ${["M1","M5","M15","M30","H1","H4","D1"].map(tf=>`<span class="${tf===timeframe?"active":""}">${tf}</span>`).join("")}
-      </div>
-      <div class="ai-terminal-chart-overlay">
-        ${entryPos!==null?`<div class="ai-level entry" style="top:${entryPos}%"><span>ENTRY ${aiEsc(Number.isFinite(entry)?aiMoney(entry):"—")}${Number.isFinite(entryHigh)?` – ${aiEsc(aiMoney(entryHigh))}`:""}</span></div>`:""}
-        ${slPos!==null?`<div class="ai-level sl" style="top:${slPos}%"><span>SL ${aiEsc(aiMoney(sl))}</span></div>`:""}
-        ${tpPos!==null?`<div class="ai-level tp" style="top:${tpPos}%"><span>TP ${aiEsc(aiMoney(tp))}</span></div>`:""}
-        ${curPos!==null?`<div class="ai-level current" style="top:${curPos}%"><span>PRICE ${aiEsc(aiMoney(current))}</span></div>`:""}
-      </div>
-    </div>
+    <div class="ai-terminal-time-only">\${x.created_at?new Date(x.created_at).toLocaleString("id-ID"):"Test result"} · \${aiEsc(setup)}</div>
     <div class="ai-signal-summary">
       <div class="ai-signal-summary-top">
         <div class="ai-decision-big ${cls}">${aiEsc(decision)}</div>
@@ -1992,50 +1909,11 @@ function aiSignalCard(x,admin=false){
   </article>`;
 }
 
-let nexoraAITVReady=null;
-function ensureNexoraAITV(){
-  if(window.TradingView&&window.TradingView.widget)return Promise.resolve();
-  if(nexoraAITVReady)return nexoraAITVReady;
-  nexoraAITVReady=new Promise((resolve)=>{
-    const existing=document.querySelector('script[data-nexora-tv]');
-    if(existing){existing.addEventListener("load",()=>resolve());setTimeout(resolve,1800);return;}
-    const s=document.createElement("script");
-    s.src="https://s3.tradingview.com/tv.js";s.async=true;s.dataset.nexoraTv="1";
-    s.onload=()=>resolve();s.onerror=()=>resolve();
-    document.head.appendChild(s);
-  });
-  return nexoraAITVReady;
-}
-async function initNexoraAICharts(){
-  await ensureNexoraAITV();
-  document.querySelectorAll(".ai-terminal[data-tv-symbol]").forEach(card=>{
-    const id=card.getAttribute("data-ai-terminal"), holder=document.getElementById("ai-chart-widget-"+id);
-    if(!holder||holder.dataset.loaded==="1"||!window.TradingView?.widget)return;
-    holder.dataset.loaded="1";
-    const intervalMap={M1:"1",M5:"5",M15:"15",M30:"30",H1:"60",H4:"240",D1:"D"};
-    const interval=intervalMap[card.getAttribute("data-tv-interval")]||"60";
-    try{
-      new TradingView.widget({
-        autosize:true,symbol:card.getAttribute("data-tv-symbol"),interval,
-        timezone:"Asia/Jakarta",theme:"dark",style:"1",locale:"en",
-        enable_publishing:false,hide_top_toolbar:false,hide_legend:false,
-        save_image:false,withdateranges:false,allow_symbol_change:false,
-        container_id:holder.id
-      });
-    }catch(e){holder.dataset.loaded="0";console.warn("Nexora AI chart:",e);}
-  });
-}
-function refreshAIChart(id){
-  const holder=document.getElementById("ai-chart-widget-"+id);
-  if(!holder)return;
-  holder.innerHTML="";holder.dataset.loaded="0";
-  initNexoraAICharts();
-}
 async function loadNexoraAIPage(){const admin=currentProfile?.role==="ADMIN";document.getElementById("ai-admin-view").style.display=admin?"grid":"none";if(!currentUser){document.getElementById("ai-member-view").style.display="none";document.getElementById("ai-member-locked").style.display="block";document.getElementById("ai-member-locked").innerHTML='<div class="lock-icon">🔐</div><h3>Login untuk membuka AI Signal</h3><p>Masuk ke akun Nexora Alpha untuk melihat signal yang sudah dipublish.</p><button class="btn primary" onclick="openAuth()">Login</button>';return;}await loadNexoraAISettings();if(admin){document.getElementById("ai-member-locked").style.display="none";document.getElementById("ai-member-view").style.display="none";await loadNexoraAIHistory();return;}const {data:settings}=await supabaseClient.from("ai_signal_settings").select("published").eq("id",1).maybeSingle();const published=!!settings?.published;document.getElementById("ai-member-view").style.display=published?"grid":"none";document.getElementById("ai-member-locked").style.display=published?"none":"block";if(published)await loadNexoraPublishedSignals();}
 async function loadNexoraAISettings(){const {data}=await supabaseClient.from("ai_signal_settings").select("published").eq("id",1).maybeSingle();const pill=document.getElementById("ai-lab-status");if(pill){pill.className="ai-status-pill "+(data?.published?"":"draft");pill.innerHTML=`<span class="ai-status-dot"></span> ${data?.published?"PUBLISHED • MEMBER VISIBLE":"DRAFT • ADMIN"}`;}}
-async function loadNexoraAIHistory(){const box=document.getElementById("ai-admin-history");if(!box)return;const {data,error}=await supabaseClient.from("ai_signals").select("*").order("created_at",{ascending:false}).limit(30);if(error){box.innerHTML='<div class="chat-empty">'+aiEsc(error.message)+"</div>";return;}box.innerHTML=(data||[]).map(x=>aiSignalCard(x,true)).join("")||'<div class="chat-empty">Belum ada hasil AI. Jalankan Analyze Market.</div>';initNexoraAICharts();}
-async function loadNexoraPublishedSignals(){const box=document.getElementById("ai-published-list");const {data,error}=await supabaseClient.from("ai_signals").select("*").eq("is_published",true).order("created_at",{ascending:false}).limit(30);if(error){box.innerHTML='<div class="chat-empty">'+aiEsc(error.message)+"</div>";return;}box.innerHTML=(data||[]).map(x=>aiSignalCard(x,false)).join("")||'<div class="chat-empty">Belum ada signal yang dipublish.</div>';initNexoraAICharts();}
-async function runNexoraAI(){if(currentProfile?.role!=="ADMIN")return alert("Admin only.");const symbol=document.getElementById("ai-symbol").value,timeframe=document.getElementById("ai-timeframe").value,price=document.getElementById("ai-price").value.trim(),snapshot=document.getElementById("ai-snapshot").value.trim(),context=document.getElementById("ai-context").value;const result=document.getElementById("ai-result");result.className="ai-result show";result.innerHTML='<div class="ai-panel" style="padding:14px">🤖 Nexora AI sedang menganalisa market…</div>';try{const session=await supabaseClient.auth.getSession();const token=session.data.session?.access_token;if(!token)throw new Error("Session login tidak ditemukan.");const res=await fetch(NEXORA_AI_FN_URL,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({action:"scan",symbol,timeframe,current_price:price,context_mode:context,market_snapshot:snapshot})});const data=await res.json();if(!res.ok)throw new Error(data?.error||"AI engine gagal dipanggil.");nexoraAILastResult=data.result||data;result.innerHTML=aiSignalCard(nexoraAILastResult,true);initNexoraAICharts();const insert={...nexoraAILastResult,is_published:false,status:"DRAFT",created_by:currentUser.id,source:"nexora-ai"};delete insert.id;delete insert.created_at;delete insert.updated_at;const saved=await supabaseClient.from("ai_signals").insert(insert).select().single();if(saved.error)throw saved.error;result.innerHTML=aiSignalCard(saved.data,true);initNexoraAICharts();await loadNexoraAIHistory();}catch(e){result.innerHTML='<div class="ai-panel" style="padding:14px;color:#ff9aaa">❌ '+aiEsc(e.message||e)+"</div>";}}
+async function loadNexoraAIHistory(){const box=document.getElementById("ai-admin-history");if(!box)return;const {data,error}=await supabaseClient.from("ai_signals").select("*").order("created_at",{ascending:false}).limit(30);if(error){box.innerHTML='<div class="chat-empty">'+aiEsc(error.message)+"</div>";return;}box.innerHTML=(data||[]).map(x=>aiSignalCard(x,true)).join("")||'<div class="chat-empty">Belum ada hasil AI. Jalankan Analyze Market.</div>';}
+async function loadNexoraPublishedSignals(){const box=document.getElementById("ai-published-list");const {data,error}=await supabaseClient.from("ai_signals").select("*").eq("is_published",true).order("created_at",{ascending:false}).limit(30);if(error){box.innerHTML='<div class="chat-empty">'+aiEsc(error.message)+"</div>";return;}box.innerHTML=(data||[]).map(x=>aiSignalCard(x,false)).join("")||'<div class="chat-empty">Belum ada signal yang dipublish.</div>';}
+async function runNexoraAI(){if(currentProfile?.role!=="ADMIN")return alert("Admin only.");const symbol=document.getElementById("ai-symbol").value,timeframe=document.getElementById("ai-timeframe").value,price=document.getElementById("ai-price").value.trim(),snapshot=document.getElementById("ai-snapshot").value.trim(),context=document.getElementById("ai-context").value;const result=document.getElementById("ai-result");result.className="ai-result show";result.innerHTML='<div class="ai-panel" style="padding:14px">🤖 Nexora AI sedang menganalisa market…</div>';try{const session=await supabaseClient.auth.getSession();const token=session.data.session?.access_token;if(!token)throw new Error("Session login tidak ditemukan.");const res=await fetch(NEXORA_AI_FN_URL,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({action:"scan",symbol,timeframe,current_price:price,context_mode:context,market_snapshot:snapshot})});const data=await res.json();if(!res.ok)throw new Error(data?.error||"AI engine gagal dipanggil.");nexoraAILastResult=data.result||data;result.innerHTML=aiSignalCard(nexoraAILastResult,true);const insert={...nexoraAILastResult,is_published:false,status:"DRAFT",created_by:currentUser.id,source:"nexora-ai"};delete insert.id;delete insert.created_at;delete insert.updated_at;const saved=await supabaseClient.from("ai_signals").insert(insert).select().single();if(saved.error)throw saved.error;result.innerHTML=aiSignalCard(saved.data,true);await loadNexoraAIHistory();}catch(e){result.innerHTML='<div class="ai-panel" style="padding:14px;color:#ff9aaa">❌ '+aiEsc(e.message||e)+"</div>";}}
 async function publishNexoraSignal(id,shouldPublish){if(currentProfile?.role!=="ADMIN")return alert("Admin only.");const {error}=await supabaseClient.from("ai_signals").update({is_published:shouldPublish,status:shouldPublish?"PUBLISHED":"DRAFT",updated_at:new Date().toISOString()}).eq("id",id);if(error)return alert(error.message);if(shouldPublish){await supabaseClient.from("ai_signal_settings").update({published:true,updated_by:currentUser.id,updated_at:new Date().toISOString()}).eq("id",1);const {data:sig}=await supabaseClient.from("ai_signals").select("symbol,timeframe,decision,setup").eq("id",id).single();if(sig){const {data:profiles}=await supabaseClient.from("profiles").select("id");const rows=(profiles||[]).map(p=>({user_id:p.id,actor_id:currentUser.id,type:"ai_signal",title:`🤖 NEXORA AI • ${sig.symbol} ${sig.decision}`,body:`${sig.timeframe} · ${sig.setup||"Validated market setup"} · Signal baru dipublish oleh AI Lab.`,broadcast_id:null,url:"/?open=ai-signal"}));if(rows.length){const {data:inserted,error:nErr}=await supabaseClient.from("notifications").insert(rows).select("id");if(nErr)console.warn("AI notification:",nErr);else await dispatchPushForNotifications((inserted||[]).map(x=>x.id));}}}await loadNexoraAISettings();await loadNexoraAIHistory();alert(shouldPublish?"Signal berhasil dipublish ke member.":"Signal dikembalikan ke draft.");}
 async function deleteNexoraSignal(id){if(currentProfile?.role!=="ADMIN")return alert("Admin only.");if(!confirm("Hapus hasil AI ini?"))return;const {error}=await supabaseClient.from("ai_signals").delete().eq("id",id);if(error)return alert(error.message);await loadNexoraAIHistory();}
 function clearNexoraAIForm(){document.getElementById("ai-price").value="";document.getElementById("ai-snapshot").value="";document.getElementById("ai-result").className="ai-result";document.getElementById("ai-result").innerHTML="";}
