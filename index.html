@@ -482,29 +482,6 @@ body.nx-animations-on{background-color:#050b17}
 /* Respect reduced-motion without removing the manual intensity control. */
 @media(prefers-reduced-motion:reduce){.nx-motion-glow,.nx-light-streak,#nx-bg-motion::before,#nx-bg-motion::after{animation:none!important}}
 
-/* NEXORA AI SIGNAL TERMINAL — additive display layer only */
-.ai-terminal{display:grid;gap:12px}
-.ai-terminal-card{position:relative;overflow:hidden;border:1px solid rgba(125,179,255,.22);border-radius:24px;background:linear-gradient(145deg,rgba(11,27,50,.86),rgba(3,9,19,.92));box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 22px 65px rgba(0,0,0,.34)}
-.ai-terminal-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.07),transparent 24%,transparent 72%,rgba(96,170,255,.05));}
-.ai-terminal-head{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 16px 12px;border-bottom:1px solid rgba(125,179,255,.10)}
-.ai-terminal-brand{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#69b8ff;font-weight:900}.ai-terminal-symbol{font-size:20px;font-weight:950;margin-top:4px}.ai-terminal-meta{font-size:10px;color:#8291a7;margin-top:4px}
-.ai-terminal-decision{font-size:19px;font-weight:950;letter-spacing:.05em;padding:8px 12px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.12)}
-.ai-terminal-decision.buy{color:#57e8ad;border-color:rgba(87,232,173,.24);box-shadow:0 0 22px rgba(87,232,173,.07)}
-.ai-terminal-decision.sell{color:#ff5576;border-color:rgba(255,85,118,.26);box-shadow:0 0 22px rgba(255,85,118,.08)}
-.ai-terminal-decision.wait{color:#ffd36d;border-color:rgba(255,211,109,.22)}
-.ai-chart-frame{position:relative;z-index:1;height:360px;background:#03070d;border-bottom:1px solid rgba(125,179,255,.10)}
-.ai-chart-frame .tradingview-widget-container,.ai-chart-frame .tradingview-widget-container__widget{width:100%!important;height:100%!important}
-.ai-levels{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid rgba(125,179,255,.10)}
-.ai-level{padding:14px 10px;text-align:center;border-right:1px solid rgba(125,179,255,.10)}.ai-level:last-child{border-right:0}.ai-level small{display:block;font-size:9px;letter-spacing:.10em;text-transform:uppercase;color:#6f7f96}.ai-level b{display:block;margin-top:6px;font-size:17px;letter-spacing:.02em}.ai-level.entry b{color:#f4f7fb}.ai-level.sl{background:rgba(255,74,95,.035)}.ai-level.sl b{color:#ff7185}.ai-level.tp{background:rgba(45,224,139,.035)}.ai-level.tp b{color:#56e2a1}
-.ai-signal-summary{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px}.ai-summary-box{padding:12px;border:1px solid rgba(125,179,255,.10);border-radius:16px;background:rgba(2,9,18,.52)}.ai-summary-box small{display:block;color:#6e7e95;font-size:9px;text-transform:uppercase;letter-spacing:.08em}.ai-summary-box b{display:block;margin-top:5px;font-size:12px;color:#dbe7f6}.ai-summary-box span{display:block;margin-top:4px;color:#91a1b7;font-size:10px;line-height:1.45}
-.ai-reason-panel{position:relative;z-index:1;margin:0 12px 12px;padding:14px;border:1px solid rgba(157,83,255,.18);border-radius:18px;background:linear-gradient(145deg,rgba(43,24,67,.22),rgba(5,12,24,.58))}.ai-reason-head{display:flex;align-items:center;gap:8px;color:#bd82ff;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:900}.ai-reason-panel ul{margin:10px 0 0;padding-left:18px;color:#c0cce0;font-size:11px;line-height:1.65}.ai-reason-panel li+li{margin-top:4px}
-.ai-invalidation{position:relative;z-index:1;margin:0 12px 12px;padding:11px 12px;border-radius:14px;border:1px solid rgba(255,191,95,.18);background:rgba(255,191,95,.06);color:#d9c59d;font-size:10px;line-height:1.5}
-.ai-terminal-foot{position:relative;z-index:1;display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 14px;color:#64748a;font-size:9px;border-top:1px solid rgba(125,179,255,.08)}
-.ai-published-list-shell{display:grid;gap:14px}.ai-published-list-shell .ai-signal-card{display:none}
-@media(max-width:620px){.ai-terminal-head{padding:14px 14px 11px}.ai-chart-frame{height:310px}.ai-level b{font-size:15px}.ai-signal-summary{grid-template-columns:1fr 1fr;padding:10px}.ai-reason-panel{margin:0 10px 10px}.ai-terminal-foot{font-size:8px}}
-@media(max-width:420px){.ai-terminal-head{flex-direction:column}.ai-terminal-decision{align-self:flex-start}.ai-chart-frame{height:285px}.ai-level{padding:12px 6px}.ai-level b{font-size:14px}}
-
-
 /* NEXORA AI SIGNAL PILOT — additive only */
 .ai-signal-shell{display:grid;grid-template-columns:1.25fr .85fr;gap:16px}
 .ai-panel{border:1px solid var(--line);background:rgba(7,18,35,.62);border-radius:24px;padding:18px;box-shadow:var(--shadow);backdrop-filter:blur(18px)}
@@ -926,205 +903,257 @@ select:focus{
 }
 
 
-/* ==========================================================
-   NEXORA ALPHA — AI TERMINAL V2
-   Additive presentation layer. Existing AI/data logic untouched.
-   ========================================================== */
-:root{
-  --nx-bg:#02040a;
-  --nx-blue:#398cff;
-  --nx-cyan:#00d9ff;
-  --nx-violet:#9b54ff;
-  --nx-green:#00e5a0;
-  --nx-red:#ff3d78;
-  --nx-glass:rgba(5,16,35,.70);
-  --nx-line:rgba(111,174,255,.25);
+/* =========================================================
+   NEXORA AI SIGNAL TERMINAL — ADDITIVE UI
+   Does not change the AI engine, Supabase schema, publishing
+   flow, or existing signal calculations.
+   ========================================================= */
+.ai-terminal-feed{
+  display:grid;
+  gap:18px;
 }
-
-html,body{
+.ai-terminal{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(104,166,255,.34);
+  border-radius:30px;
   background:
-    radial-gradient(circle at 12% 14%,rgba(31,105,255,.16),transparent 25%),
-    radial-gradient(circle at 88% 18%,rgba(145,55,255,.13),transparent 27%),
-    radial-gradient(circle at 50% 90%,rgba(0,216,255,.09),transparent 30%),
-    var(--nx-bg) !important;
-}
-
-body{
-  color:#eaf3ff !important;
-  background-attachment:fixed !important;
-}
-
-/* Main glass surfaces */
-.topbar,.panel,.feature,.card,.news,.ticker,.modal,
-.stat-card,.profile-card,.notification-card,.chat-panel,
-.course-card,.lesson-card,.academy-card,.settings-card,
-.table-wrap,.segmented{
-  background:
-    linear-gradient(145deg,rgba(19,46,82,.72),rgba(2,9,21,.82)) !important;
-  border:1px solid rgba(105,177,255,.22) !important;
+    radial-gradient(circle at 12% 0%,rgba(50,126,255,.13),transparent 30%),
+    radial-gradient(circle at 92% 28%,rgba(153,62,255,.11),transparent 32%),
+    linear-gradient(145deg,rgba(11,29,58,.88),rgba(3,10,22,.94));
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.20),
-    inset 0 -1px 0 rgba(0,0,0,.35),
-    0 18px 60px rgba(0,0,0,.42),
-    0 0 35px rgba(45,127,255,.07) !important;
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -1px 0 rgba(0,0,0,.45),
+    0 28px 80px rgba(0,0,0,.42),
+    0 0 45px rgba(54,137,255,.10);
   backdrop-filter:blur(26px) saturate(165%);
   -webkit-backdrop-filter:blur(26px) saturate(165%);
 }
-
-/* Header */
-.topbar{
-  border-radius:28px !important;
-  background:
-    linear-gradient(110deg,rgba(14,40,83,.78),rgba(4,13,29,.78)) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.27),
-    0 18px 55px rgba(0,0,0,.42),
-    0 0 32px rgba(42,124,255,.15) !important;
-}
-
-/* AI Signal hero */
-.ai-signal,.ai-terminal,.signal-terminal,.signal-card{
-  border-radius:30px !important;
-  background:
-    linear-gradient(145deg,rgba(8,31,67,.86),rgba(2,9,20,.88)) !important;
-  border:1px solid rgba(83,156,255,.28) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.22),
-    0 25px 80px rgba(0,0,0,.46),
-    0 0 55px rgba(47,133,255,.12) !important;
-}
-
-/* Make controls feel like the reference */
-button,.btn,.icon-btn,select,input,textarea{
-  border-radius:18px !important;
-  border-color:rgba(135,190,255,.25) !important;
-  background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(5,17,34,.65)) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.14),
-    0 8px 25px rgba(0,0,0,.20) !important;
-}
-
-button:hover,.btn:hover,.icon-btn:hover{
-  border-color:rgba(0,201,255,.50) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.22),
-    0 0 25px rgba(40,140,255,.18) !important;
-}
-
-/* Glass reflection */
-.topbar::before,.panel::before,.feature::before,.card::before,
-.news::before,.ticker::before,.modal::before,.ai-signal::before,
-.ai-terminal::before,.signal-terminal::before,.signal-card::before{
+.ai-terminal::before{
   content:"";
   position:absolute;
   inset:1px;
-  pointer-events:none;
   border-radius:inherit;
-  background:linear-gradient(
-    115deg,
-    rgba(255,255,255,.20),
-    rgba(255,255,255,.03) 18%,
-    transparent 38%,
-    transparent 74%,
-    rgba(70,163,255,.07)
-  );
+  pointer-events:none;
+  background:linear-gradient(112deg,rgba(255,255,255,.18),transparent 18%,transparent 72%,rgba(116,177,255,.08));
 }
-
-/* Signal-specific semantic colors */
-.sell,.signal-sell,[data-signal="SELL"]{
-  color:#ff4c82 !important;
+.ai-terminal > *{position:relative;z-index:1}
+.ai-terminal-head{
+  padding:17px 18px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
 }
-.buy,.signal-buy,[data-signal="BUY"]{
-  color:#00e5a0 !important;
+.ai-terminal-brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
 }
-
-.tp,.take-profit,.target{
-  color:#00e5a0 !important;
+.ai-terminal-orb{
+  width:42px;height:42px;border-radius:50%;
+  display:grid;place-items:center;
+  font-size:20px;
+  background:radial-gradient(circle at 35% 25%,#ffe27a,#b97900 55%,#2a1700);
+  border:1px solid rgba(255,221,108,.45);
+  box-shadow:0 0 24px rgba(255,190,45,.20),inset 0 1px 0 rgba(255,255,255,.45);
 }
-.sl,.stop-loss,.stop{
-  color:#ff4c72 !important;
+.ai-terminal-symbol{font-size:22px;font-weight:950;letter-spacing:.03em}
+.ai-terminal-sub{font-size:11px;color:#8fa4c2;margin-top:3px}
+.ai-terminal-live{
+  display:inline-flex;align-items:center;gap:7px;
+  border:1px solid rgba(60,226,169,.30);
+  border-radius:999px;padding:8px 11px;
+  color:#65e7bb;background:rgba(27,176,126,.08);
+  font-size:10px;font-weight:900;letter-spacing:.07em;
 }
-.entry,.entry-price{
-  color:#73b7ff !important;
+.ai-terminal-live span{width:7px;height:7px;border-radius:50%;background:#43e5ad;box-shadow:0 0 11px #43e5ad}
+.ai-terminal-toolbar{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:0 18px 13px;flex-wrap:wrap;
 }
-
-/* Chart container */
-.chart-container,.tradingview-widget-container,.chart-wrap{
-  border-radius:26px !important;
-  overflow:hidden !important;
-  background:#01050c !important;
-  border:1px solid rgba(91,165,255,.28) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.10),
-    0 20px 50px rgba(0,0,0,.35) !important;
+.ai-terminal-time{
+  font-size:10px;color:#8ea1bc;
 }
-
-/* Signal metrics */
-.signal-metrics,.trade-levels,.entry-sl-tp,.risk-reward{
-  display:grid;
-  gap:1px;
-  border-radius:24px !important;
+.ai-terminal-refresh{
+  border:1px solid rgba(96,163,255,.32)!important;
+  border-radius:999px!important;
+  padding:8px 12px!important;
+  background:rgba(55,126,255,.10)!important;
+  color:#b8d4ff!important;
+  font-size:10px!important;
+}
+.ai-terminal-chart{
+  margin:0 10px 12px;
+  border:1px solid rgba(78,158,255,.34);
+  border-radius:25px;
   overflow:hidden;
-  background:rgba(96,145,210,.18);
-}
-
-.signal-metrics > *, .trade-levels > *, .entry-sl-tp > *{
-  background:rgba(4,14,29,.88) !important;
-  padding:18px !important;
-}
-
-/* Reasoning panel */
-.reasoning,.ai-reasoning,.analysis,.analysis-panel{
-  border-radius:26px !important;
-  background:linear-gradient(145deg,rgba(10,23,48,.88),rgba(2,8,19,.88)) !important;
-  border:1px solid rgba(86,153,255,.24) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.12),
-    0 20px 55px rgba(0,0,0,.32) !important;
-}
-
-/* Bottom mobile nav */
-.bottom-nav,.mobile-nav,nav.bottom{
-  background:rgba(3,12,27,.86) !important;
-  border:1px solid rgba(86,161,255,.25) !important;
-  box-shadow:
-    0 -10px 40px rgba(0,0,0,.40),
-    0 0 35px rgba(45,127,255,.08) !important;
-  backdrop-filter:blur(28px) saturate(170%);
-  -webkit-backdrop-filter:blur(28px) saturate(170%);
-}
-
-/* Active navigation */
-.bottom-nav .active,.mobile-nav .active{
-  border-radius:22px !important;
-  background:
-    linear-gradient(145deg,rgba(48,125,255,.28),rgba(80,53,255,.13)) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.20),
-    0 0 25px rgba(47,141,255,.25) !important;
-}
-
-/* Stronger neon edge for key cards */
-.ai-signal,.ai-terminal,.signal-terminal{
   position:relative;
+  min-height:350px;
+  background:#020817;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 28px rgba(45,130,255,.08);
 }
-.ai-signal::after,.ai-terminal::after,.signal-terminal::after{
-  content:"";
-  position:absolute;
-  inset:-1px;
-  border-radius:inherit;
-  pointer-events:none;
-  box-shadow:
-    inset 0 0 0 1px rgba(71,147,255,.12),
-    inset 0 0 35px rgba(30,117,255,.05);
+.ai-terminal-chart-widget{
+  position:absolute;inset:0;
 }
-
-/* Mobile spacing */
+.ai-terminal-chart-widget .tradingview-widget-container,
+.ai-terminal-chart-widget .tradingview-widget-container__widget{
+  width:100%!important;height:100%!important;
+}
+.ai-terminal-chart-overlay{
+  position:absolute;inset:0;pointer-events:none;z-index:5;
+}
+.ai-level{
+  position:absolute;left:8px;right:8px;height:0;border-top:1px dashed;
+  display:flex;justify-content:flex-end;align-items:flex-start;
+}
+.ai-level span{
+  transform:translateY(-50%);
+  padding:4px 7px;border-radius:8px;
+  font-size:9px;font-weight:950;letter-spacing:.02em;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.ai-level.entry{border-color:#4aa6ff}
+.ai-level.entry span{color:#bfe0ff;background:rgba(30,116,221,.28);border:1px solid rgba(82,170,255,.42)}
+.ai-level.sl{border-color:#ff4f72}
+.ai-level.sl span{color:#ff91a5;background:rgba(213,38,76,.25);border:1px solid rgba(255,82,111,.40)}
+.ai-level.tp{border-color:#24e4b1}
+.ai-level.tp span{color:#69efc8;background:rgba(15,174,129,.22);border:1px solid rgba(44,231,181,.40)}
+.ai-level.current{border-color:#ad66ff}
+.ai-level.current span{color:#d4aaff;background:rgba(121,55,208,.26);border:1px solid rgba(176,105,255,.38)}
+.ai-timeframe-strip{
+  position:absolute;left:12px;top:10px;z-index:6;
+  display:flex;gap:6px;
+}
+.ai-timeframe-strip span{
+  padding:5px 8px;border-radius:9px;
+  font-size:9px;color:#8295b2;
+  border:1px solid rgba(100,157,230,.13);
+  background:rgba(2,10,24,.48);
+}
+.ai-timeframe-strip span.active{
+  color:#a9dcff;border-color:rgba(64,187,255,.48);
+  box-shadow:0 0 15px rgba(50,173,255,.18);
+  background:rgba(29,116,190,.22);
+}
+.ai-signal-summary{
+  margin:0 10px 10px;
+  border:1px solid rgba(95,159,255,.27);
+  border-radius:24px;
+  overflow:hidden;
+  background:linear-gradient(145deg,rgba(9,26,50,.72),rgba(4,12,25,.78));
+}
+.ai-signal-summary-top{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:15px 16px;border-bottom:1px solid rgba(127,170,224,.10);
+}
+.ai-decision-big{
+  font-size:27px;font-weight:950;letter-spacing:.02em;
+}
+.ai-decision-big.buy{color:#5ff0b5;text-shadow:0 0 20px rgba(69,238,173,.18)}
+.ai-decision-big.sell{color:#ff4775;text-shadow:0 0 20px rgba(255,57,102,.18)}
+.ai-decision-big.wait{color:#ffd56e}
+.ai-confidence{
+  min-width:120px;
+}
+.ai-confidence small{
+  display:block;color:#7890af;text-transform:uppercase;font-size:8px;letter-spacing:.13em;
+}
+.ai-confidence b{font-size:14px}
+.ai-confidence-bar{
+  height:6px;border-radius:999px;margin-top:6px;
+  background:rgba(76,120,175,.18);overflow:hidden;
+}
+.ai-confidence-bar i{
+  display:block;height:100%;border-radius:inherit;
+  background:linear-gradient(90deg,#318dff,#9c6bff);
+  box-shadow:0 0 12px rgba(67,145,255,.42);
+}
+.ai-rr{
+  border:1px solid rgba(115,173,255,.20);
+  background:rgba(47,102,177,.12);
+  padding:8px 10px;border-radius:11px;
+  color:#bcd7ff;font-size:10px;font-weight:900;white-space:nowrap;
+}
+.ai-price-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+}
+.ai-price-cell{
+  padding:13px 12px;text-align:center;
+  border-right:1px solid rgba(127,170,224,.10);
+}
+.ai-price-cell:last-child{border-right:0}
+.ai-price-cell small{
+  display:block;font-size:8px;color:#72849e;letter-spacing:.12em;text-transform:uppercase;
+}
+.ai-price-cell b{display:block;margin-top:5px;font-size:16px;letter-spacing:.01em}
+.ai-price-cell.entry b{color:#d8eaff}
+.ai-price-cell.sl b{color:#ff7d91}
+.ai-price-cell.tp b{color:#53e7b1}
+.ai-reasoning{
+  margin:0 10px 14px;
+  border:1px solid rgba(139,93,255,.25);
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 8% 0%,rgba(130,77,255,.10),transparent 28%),
+    linear-gradient(145deg,rgba(20,15,42,.70),rgba(5,12,25,.82));
+  overflow:hidden;
+}
+.ai-reasoning-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;border-bottom:1px solid rgba(161,119,255,.10);
+}
+.ai-reasoning-title{display:flex;align-items:center;gap:9px;font-weight:950;letter-spacing:.10em;font-size:11px;color:#cbaaff}
+.ai-reasoning-title .brain{font-size:19px}
+.ai-reasoning-version{
+  border:1px solid rgba(144,104,255,.22);border-radius:999px;
+  padding:5px 8px;font-size:8px;color:#bba2e8;background:rgba(119,75,206,.10);
+}
+.ai-reasoning-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;
+  background:rgba(128,90,210,.10);
+}
+.ai-reasoning-item{
+  padding:13px 14px;background:rgba(6,12,26,.76);
+  min-height:94px;
+}
+.ai-reasoning-item.full{grid-column:1/-1;min-height:auto}
+.ai-reasoning-item h4{
+  margin:0 0 7px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6caaff;
+}
+.ai-reasoning-item p,.ai-reasoning-item li{
+  margin:0;color:#afbdd0;font-size:11px;line-height:1.55;
+}
+.ai-reasoning-item ul{margin:0;padding-left:16px}
+.ai-correction-terminal{
+  margin:0 10px 16px;
+  padding:11px 13px;
+  border:1px solid rgba(255,176,85,.20);
+  border-radius:15px;
+  color:#e9c995;background:rgba(173,105,30,.08);
+  font-size:10px;line-height:1.5;
+}
+.ai-terminal-admin-actions{
+  display:flex;gap:8px;padding:0 10px 14px;flex-wrap:wrap;
+}
+.ai-terminal-admin-actions .ai-mini{
+  border-radius:12px!important;
+  padding:8px 12px!important;
+}
 @media(max-width:720px){
-  .topbar{border-radius:24px !important}
-  .panel,.card,.feature,.news,.ai-signal,.ai-terminal,.signal-terminal{
-    border-radius:24px !important;
-  }
+  .ai-terminal{border-radius:24px}
+  .ai-terminal-chart{min-height:330px;margin:0 7px 10px;border-radius:20px}
+  .ai-terminal-head{padding:14px 13px 9px}
+  .ai-terminal-toolbar{padding:0 13px 10px}
+  .ai-signal-summary{margin:0 7px 8px;border-radius:20px}
+  .ai-reasoning{margin:0 7px 10px;border-radius:20px}
+  .ai-price-cell{padding:11px 6px}
+  .ai-price-cell b{font-size:14px}
+  .ai-reasoning-grid{grid-template-columns:1fr}
+  .ai-reasoning-item.full{grid-column:auto}
+  .ai-confidence{min-width:100px}
+  .ai-decision-big{font-size:25px}
 }
 
 </style>
@@ -1199,8 +1228,8 @@ new TradingView.widget({
     <p>Fitur ini sedang diuji oleh ADMIN Nexora Alpha. Signal belum dipublikasikan ke member.</p>
   </div>
   <div id="ai-member-view" class="ai-signal-shell" style="display:none">
-    <div class="ai-panel"><div class="ai-head-row"><div><div class="ai-kicker">Published Signals</div><h3 style="margin:6px 0 0">Nexora AI Signal Terminal</h3></div><span class="ai-status-pill"><span class="ai-status-dot"></span> LIVE</span></div><div id="ai-published-list" class="ai-history"><div class="chat-empty">Memuat signal…</div></div></div>
-    <div class="ai-panel ai-auto-card"><div class="ai-kicker">AI Engine</div><h3 style="margin:0">Market Intelligence</h3><div class="ai-auto-row"><span>Mode</span><b>Published only</b></div><div class="ai-auto-row"><span>Correction</span><b>Enabled</b></div><div class="ai-auto-row"><span>Auto signal</span><b>From validated setups</b></div><p class="ai-code-hint">Chart berasal dari TradingView. Level Entry / SL / TP dan reasoning berasal dari signal AI yang sudah dipublish.</p></div>
+    <div class="ai-panel"><div class="ai-head-row"><div><div class="ai-kicker">Published Signals</div><h3 style="margin:6px 0 0">Nexora AI Signal Feed</h3></div><span class="ai-status-pill"><span class="ai-status-dot"></span> LIVE</span></div><div id="ai-published-list" class="ai-history ai-terminal-feed"><div class="chat-empty">Memuat signal…</div></div></div>
+    <div class="ai-panel ai-auto-card"><div class="ai-kicker">AI Engine</div><h3 style="margin:0">Market Intelligence</h3><div class="ai-auto-row"><span>Mode</span><b>Published only</b></div><div class="ai-auto-row"><span>Correction</span><b>Enabled</b></div><div class="ai-auto-row"><span>Auto signal</span><b>From validated setups</b></div><p class="ai-code-hint">Signal yang tampil di sini adalah hasil yang sudah dipublish oleh Nexora AI Lab.</p></div>
   </div>
   <div id="ai-admin-view" class="ai-signal-shell" style="display:none">
     <div class="ai-panel">
@@ -1878,43 +1907,135 @@ go=function(id){_nexoraOriginalGo(id);if(id==="ai-signal")loadNexoraAIPage();};
 function aiEsc(v){return esc(v==null?"":String(v));}
 function aiMoney(v){if(v===null||v===undefined||v==="")return "—";return String(v);}
 function aiDecisionClass(v){return String(v||"").toLowerCase()==="buy"?"buy":String(v||"").toLowerCase()==="sell"?"sell":"wait";}
-function aiTfToTv(tf){return ({M1:"1",M5:"5",M15:"15",M30:"30",H1:"60",H4:"240",D1:"D",W1:"W"})[String(tf||"").toUpperCase()]||"15";}
-function aiTvSymbol(sym){return ({XAUUSD:"OANDA:XAUUSD",BTCUSD:"COINBASE:BTCUSD",EURUSD:"OANDA:EURUSD",GBPUSD:"OANDA:GBPUSD",USDIDR:"FX_IDC:USDIDR"})[String(sym||"").toUpperCase()]||String(sym||"OANDA:XAUUSD");}
-function aiNum(v){const n=Number(v);return Number.isFinite(n)?n:null;}
-function aiEntryMid(x){const lo=aiNum(x.entry_low),hi=aiNum(x.entry_high);if(lo!==null&&hi!==null)return (lo+hi)/2;return lo!==null?lo:hi;}
-function aiRR(x){const e=aiEntryMid(x),sl=aiNum(x.stop_loss),tp=aiNum(x.take_profit1);if(e===null||sl===null||tp===null)return null;const d=String(x.decision||"").toUpperCase();const risk=d==="SELL"?sl-e:e-sl;const reward=d==="SELL"?e-tp:tp-e;if(risk<=0||reward<=0)return null;return reward/risk;}
 function aiSignalCard(x,admin=false){
-  const decision=String(x.decision||"WAIT").toUpperCase(),cls=aiDecisionClass(decision),conf=Number(x.confidence||0),reasons=Array.isArray(x.rationale)?x.rationale:[];
-  if(admin){return `<div class="ai-signal-card"><div class="ai-signal-top"><div><div class="ai-signal-symbol">${aiEsc(x.symbol||"—")}</div><div class="ai-signal-time">${aiEsc(x.timeframe||"—")} · ${x.created_at?new Date(x.created_at).toLocaleString("id-ID"):"Test result"}</div></div><span class="ai-decision ${cls}">${aiEsc(decision)}</span></div><div class="ai-metrics"><div class="ai-metric"><small>Confidence</small><b>${aiEsc(conf)}%</b></div><div class="ai-metric"><small>Entry</small><b>${aiEsc(x.entry_low||"—")}${x.entry_high?" – "+aiEsc(x.entry_high):""}</b></div><div class="ai-metric"><small>SL</small><b>${aiEsc(x.stop_loss||"—")}</b></div><div class="ai-metric"><small>TP</small><b>${aiEsc(x.take_profit1||"—")}</b></div></div><div style="margin-top:12px;font-size:12px;color:#b9c8dc"><b>Setup:</b> ${aiEsc(x.setup||"Tidak ada setup valid")}</div><ul class="ai-reasons">${reasons.slice(0,5).map(r=>`<li>${aiEsc(r)}</li>`).join("")||"<li>Belum ada alasan yang diberikan.</li>"}</ul>${x.invalidation?`<div class="ai-correction"><b>Invalidation:</b> ${aiEsc(x.invalidation)}</div>`:""}${x.correction?`<div class="ai-correction"><b>Correction:</b> ${aiEsc(x.correction)}</div>`:""}${x.id?`<div class="ai-history-actions"><button class="ai-mini" onclick="publishNexoraSignal('${aiEsc(x.id)}',${x.is_published?"false":"true"})">${x.is_published?"Unpublish":"Publish"}</button><button class="ai-mini" onclick="deleteNexoraSignal('${aiEsc(x.id)}')">Hapus</button></div>`:""}</div>`;}
-  const chartId="nx-ai-chart-"+String(x.id||Math.random().toString(36).slice(2)).replace(/[^a-zA-Z0-9_-]/g,"");
-  const entry=x.entry_low&&x.entry_high?`${aiEsc(x.entry_low)} – ${aiEsc(x.entry_high)}`:aiEsc(x.entry_low||x.entry_high||"—");
-  const rr=aiRR(x); const created=x.created_at?new Date(x.created_at).toLocaleString("id-ID"):"Signal aktif";
-  return `<article class="ai-terminal-card ai-terminal" data-tv-symbol="${aiEsc(aiTvSymbol(x.symbol))}" data-tv-interval="${aiEsc(aiTfToTv(x.timeframe))}" data-chart-id="${chartId}">
-    <div class="ai-terminal-head"><div><div class="ai-terminal-brand">NEXORA AI • ENTRY SIGNAL</div><div class="ai-terminal-symbol">${aiEsc(x.symbol||"—")}</div><div class="ai-terminal-meta">${aiEsc(x.timeframe||"—")} · ${aiEsc(created)}</div></div><div class="ai-terminal-decision ${cls}">${aiEsc(decision)}</div></div>
-    <div class="ai-chart-frame"><div id="${chartId}" class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div></div></div>
-    <div class="ai-levels"><div class="ai-level entry"><small>ENTRY</small><b>${entry}</b></div><div class="ai-level sl"><small>STOP LOSS</small><b>${aiEsc(x.stop_loss||"—")}</b></div><div class="ai-level tp"><small>TAKE PROFIT</small><b>${aiEsc(x.take_profit1||"—")}</b></div></div>
-    <div class="ai-signal-summary"><div class="ai-summary-box"><small>Confidence</small><b>${aiEsc(conf)}%</b><span>${aiEsc(x.setup||"Validated setup")}</span></div><div class="ai-summary-box"><small>Risk / Reward</small><b>${rr?"1 : "+rr.toFixed(2):"—"}</b><span>${aiEsc(x.invalidation||"Invalidation mengikuti thesis AI")}</span></div></div>
-    <div class="ai-reason-panel"><div class="ai-reason-head">◈ AI Reasoning</div><ul>${reasons.slice(0,8).map(r=>`<li>${aiEsc(r)}</li>`).join("")||"<li>Reasoning belum tersedia pada signal ini.</li>"}</ul></div>
-    ${x.correction?`<div class="ai-invalidation"><b>Correction:</b> ${aiEsc(x.correction)}</div>`:""}
-    <div class="ai-terminal-foot"><span>CHART: TRADINGVIEW</span><span>${x.source?aiEsc(x.source):"NEXORA AI"} · ${aiEsc(created)}</span></div>
+  const decision=String(x.decision||"WAIT").toUpperCase();
+  const cls=aiDecisionClass(decision);
+  const conf=Math.max(0,Math.min(100,Number(x.confidence||0)));
+  const reasons=Array.isArray(x.rationale)?x.rationale:[];
+  const symbol=String(x.symbol||"XAUUSD").toUpperCase();
+  const timeframe=String(x.timeframe||"H1").toUpperCase();
+  const tvMap={
+    XAUUSD:"OANDA:XAUUSD",BTCUSD:"COINBASE:BTCUSD",
+    EURUSD:"OANDA:EURUSD",GBPUSD:"OANDA:GBPUSD",USDIDR:"OANDA:USDIDR"
+  };
+  const tvSymbol=tvMap[symbol]||("OANDA:"+symbol);
+  const entry=Number(x.entry_low ?? x.entry ?? NaN);
+  const entryHigh=Number(x.entry_high ?? NaN);
+  const sl=Number(x.stop_loss ?? NaN);
+  const tp=Number(x.take_profit1 ?? x.take_profit ?? NaN);
+  const current=Number(x.current_price ?? x.currentPrice ?? NaN);
+  const vals=[entry,entryHigh,sl,tp,current].filter(Number.isFinite);
+  const min=Math.min(...vals), max=Math.max(...vals), span=(max-min)||1;
+  const pos=(v)=>Number.isFinite(v)?Math.max(7,Math.min(93,(max-v)/span*100)) : null;
+  const entryPos=pos(Number.isFinite(entryHigh)?(entry+entryHigh)/2:entry);
+  const slPos=pos(sl),tpPos=pos(tp),curPos=pos(current);
+  const rr=(Number.isFinite(entry)&&Number.isFinite(sl)&&Number.isFinite(tp)&&Math.abs(entry-sl)>0)
+    ? (Math.abs(tp-entry)/Math.abs(entry-sl)).toFixed(2) : "—";
+  const id=String(x.id||("preview-"+Math.random().toString(36).slice(2)));
+  const safeId=id.replace(/[^a-zA-Z0-9_-]/g,"_");
+  const reasonsHtml=reasons.slice(0,6).map((r,i)=>`<li>${aiEsc(r)}</li>`).join("")||"<li>Belum ada alasan yang diberikan.</li>";
+  const setup=aiEsc(x.setup||"Setup berdasarkan validasi AI Nexora.");
+  const invalidation=aiEsc(x.invalidation||"Tidak ada invalidation yang diberikan.");
+  const correction=x.correction?aiEsc(x.correction):"Tidak ada koreksi thesis saat ini.";
+  return `
+  <article class="ai-terminal" data-ai-terminal="${safeId}" data-tv-symbol="${aiEsc(tvSymbol)}" data-tv-interval="${aiEsc(timeframe)}">
+    <div class="ai-terminal-head">
+      <div class="ai-terminal-brand">
+        <div class="ai-terminal-orb">▣</div>
+        <div><div class="ai-terminal-symbol">${aiEsc(symbol)}</div><div class="ai-terminal-sub">Gold / US Dollar · ${aiEsc(timeframe)} · NEXORA AI SIGNAL</div></div>
+      </div>
+      <span class="ai-terminal-live"><span></span>${x.is_published?"LIVE SIGNAL":"AI PREVIEW"}</span>
+    </div>
+    <div class="ai-terminal-toolbar">
+      <div class="ai-terminal-time">${x.created_at?new Date(x.created_at).toLocaleString("id-ID"):"Test result"} · ${aiEsc(setup)}</div>
+      <button class="ai-terminal-refresh" type="button" onclick="refreshAIChart('${safeId}')">↻ Refresh Chart</button>
+    </div>
+    <div class="ai-terminal-chart" id="ai-chart-${safeId}">
+      <div class="ai-terminal-chart-widget" id="ai-chart-widget-${safeId}"></div>
+      <div class="ai-timeframe-strip">
+        ${["M1","M5","M15","M30","H1","H4","D1"].map(tf=>`<span class="${tf===timeframe?"active":""}">${tf}</span>`).join("")}
+      </div>
+      <div class="ai-terminal-chart-overlay">
+        ${entryPos!==null?`<div class="ai-level entry" style="top:${entryPos}%"><span>ENTRY ${aiEsc(Number.isFinite(entry)?aiMoney(entry):"—")}${Number.isFinite(entryHigh)?` – ${aiEsc(aiMoney(entryHigh))}`:""}</span></div>`:""}
+        ${slPos!==null?`<div class="ai-level sl" style="top:${slPos}%"><span>SL ${aiEsc(aiMoney(sl))}</span></div>`:""}
+        ${tpPos!==null?`<div class="ai-level tp" style="top:${tpPos}%"><span>TP ${aiEsc(aiMoney(tp))}</span></div>`:""}
+        ${curPos!==null?`<div class="ai-level current" style="top:${curPos}%"><span>PRICE ${aiEsc(aiMoney(current))}</span></div>`:""}
+      </div>
+    </div>
+    <div class="ai-signal-summary">
+      <div class="ai-signal-summary-top">
+        <div class="ai-decision-big ${cls}">${aiEsc(decision)}</div>
+        <div class="ai-confidence"><small>Confidence</small><b>${aiEsc(conf)}%</b><div class="ai-confidence-bar"><i style="width:${conf}%"></i></div></div>
+        <div class="ai-rr">PLAN RR ${aiEsc(rr==="—"?"—":"1:"+rr)}</div>
+      </div>
+      <div class="ai-price-grid">
+        <div class="ai-price-cell entry"><small>Entry</small><b>${Number.isFinite(entry)?aiEsc(aiMoney(entry)):"—"}</b></div>
+        <div class="ai-price-cell sl"><small>Stop Loss</small><b>${Number.isFinite(sl)?aiEsc(aiMoney(sl)):"—"}</b></div>
+        <div class="ai-price-cell tp"><small>Take Profit</small><b>${Number.isFinite(tp)?aiEsc(aiMoney(tp)):"—"}</b></div>
+      </div>
+    </div>
+    <div class="ai-reasoning">
+      <div class="ai-reasoning-head">
+        <div class="ai-reasoning-title"><span class="brain">◉</span> NEXORA AI REASONING</div>
+        <span class="ai-reasoning-version">AI ANALYSIS</span>
+      </div>
+      <div class="ai-reasoning-grid">
+        <div class="ai-reasoning-item"><h4>Setup</h4><p>${setup}</p></div>
+        <div class="ai-reasoning-item"><h4>Signal Rationale</h4><ul>${reasonsHtml}</ul></div>
+        <div class="ai-reasoning-item"><h4>Invalidation</h4><p>${invalidation}</p></div>
+        <div class="ai-reasoning-item"><h4>Market Decision</h4><p>${aiEsc(decision)} · Confidence ${aiEsc(conf)}%</p></div>
+        <div class="ai-reasoning-item full"><h4>Correction / Thesis Update</h4><p>${correction}</p></div>
+      </div>
+    </div>
+    ${x.correction||x.invalidation?`<div class="ai-correction-terminal"><b>AI RISK CONTROL</b><br>${correction}${x.invalidation?`<br><br><b>Invalidation:</b> ${invalidation}`:""}</div>`:""}
+    ${admin&&x.id?`<div class="ai-terminal-admin-actions"><button class="ai-mini" onclick="publishNexoraSignal('${aiEsc(x.id)}',${x.is_published?"false":"true"})">${x.is_published?"Unpublish":"Publish"}</button><button class="ai-mini" onclick="deleteNexoraSignal('${aiEsc(x.id)}')">Hapus</button></div>`:""}
   </article>`;
 }
-function mountNexoraAICharts(root){
-  if(!root)return;
-  root.querySelectorAll(".ai-terminal[data-chart-id]").forEach(card=>{
-    const host=card.querySelector(".tradingview-widget-container"); if(!host||host.dataset.mounted==="1")return;
-    host.dataset.mounted="1";
-    const symbol=card.dataset.tvSymbol||"OANDA:XAUUSD", interval=card.dataset.tvInterval||"15";
-    const widget=document.createElement("script"); widget.type="text/javascript"; widget.src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"; widget.async=true;
-    widget.textContent=JSON.stringify({autosize:true,symbol,interval,timezone:"Asia/Jakarta",theme:"dark",style:"1",locale:"en",allow_symbol_change:false,calendar:false,hide_side_toolbar:true,hide_top_toolbar:false,hide_legend:false,save_image:false,backgroundColor:"#03070d",gridColor:"rgba(126,153,190,0.12)",support_host:"https://www.tradingview.com"});
-    host.appendChild(widget);
+
+let nexoraAITVReady=null;
+function ensureNexoraAITV(){
+  if(window.TradingView&&window.TradingView.widget)return Promise.resolve();
+  if(nexoraAITVReady)return nexoraAITVReady;
+  nexoraAITVReady=new Promise((resolve)=>{
+    const existing=document.querySelector('script[data-nexora-tv]');
+    if(existing){existing.addEventListener("load",()=>resolve());setTimeout(resolve,1800);return;}
+    const s=document.createElement("script");
+    s.src="https://s3.tradingview.com/tv.js";s.async=true;s.dataset.nexoraTv="1";
+    s.onload=()=>resolve();s.onerror=()=>resolve();
+    document.head.appendChild(s);
   });
+  return nexoraAITVReady;
+}
+async function initNexoraAICharts(){
+  await ensureNexoraAITV();
+  document.querySelectorAll(".ai-terminal[data-tv-symbol]").forEach(card=>{
+    const id=card.getAttribute("data-ai-terminal"), holder=document.getElementById("ai-chart-widget-"+id);
+    if(!holder||holder.dataset.loaded==="1"||!window.TradingView?.widget)return;
+    holder.dataset.loaded="1";
+    const intervalMap={M1:"1",M5:"5",M15:"15",M30:"30",H1:"60",H4:"240",D1:"D"};
+    const interval=intervalMap[card.getAttribute("data-tv-interval")]||"60";
+    try{
+      new TradingView.widget({
+        autosize:true,symbol:card.getAttribute("data-tv-symbol"),interval,
+        timezone:"Asia/Jakarta",theme:"dark",style:"1",locale:"en",
+        enable_publishing:false,hide_top_toolbar:false,hide_legend:false,
+        save_image:false,withdateranges:false,allow_symbol_change:false,
+        container_id:holder.id
+      });
+    }catch(e){holder.dataset.loaded="0";console.warn("Nexora AI chart:",e);}
+  });
+}
+function refreshAIChart(id){
+  const holder=document.getElementById("ai-chart-widget-"+id);
+  if(!holder)return;
+  holder.innerHTML="";holder.dataset.loaded="0";
+  initNexoraAICharts();
 }
 async function loadNexoraAIPage(){const admin=currentProfile?.role==="ADMIN";document.getElementById("ai-admin-view").style.display=admin?"grid":"none";if(!currentUser){document.getElementById("ai-member-view").style.display="none";document.getElementById("ai-member-locked").style.display="block";document.getElementById("ai-member-locked").innerHTML='<div class="lock-icon">🔐</div><h3>Login untuk membuka AI Signal</h3><p>Masuk ke akun Nexora Alpha untuk melihat signal yang sudah dipublish.</p><button class="btn primary" onclick="openAuth()">Login</button>';return;}await loadNexoraAISettings();if(admin){document.getElementById("ai-member-locked").style.display="none";document.getElementById("ai-member-view").style.display="none";await loadNexoraAIHistory();return;}const {data:settings}=await supabaseClient.from("ai_signal_settings").select("published").eq("id",1).maybeSingle();const published=!!settings?.published;document.getElementById("ai-member-view").style.display=published?"grid":"none";document.getElementById("ai-member-locked").style.display=published?"none":"block";if(published)await loadNexoraPublishedSignals();}
 async function loadNexoraAISettings(){const {data}=await supabaseClient.from("ai_signal_settings").select("published").eq("id",1).maybeSingle();const pill=document.getElementById("ai-lab-status");if(pill){pill.className="ai-status-pill "+(data?.published?"":"draft");pill.innerHTML=`<span class="ai-status-dot"></span> ${data?.published?"PUBLISHED • MEMBER VISIBLE":"DRAFT • ADMIN"}`;}}
-async function loadNexoraAIHistory(){const box=document.getElementById("ai-admin-history");if(!box)return;const {data,error}=await supabaseClient.from("ai_signals").select("*").order("created_at",{ascending:false}).limit(30);if(error){box.innerHTML='<div class="chat-empty">'+aiEsc(error.message)+"</div>";return;}box.innerHTML=(data||[]).map(x=>aiSignalCard(x,true)).join("")||'<div class="chat-empty">Belum ada hasil AI. Jalankan Analyze Market.</div>';}
-async function loadNexoraPublishedSignals(){const box=document.getElementById("ai-published-list");const {data,error}=await supabaseClient.from("ai_signals").select("*").eq("is_published",true).order("created_at",{ascending:false}).limit(30);if(error){box.innerHTML='<div class="chat-empty">'+aiEsc(error.message)+"</div>";return;}box.innerHTML=(data||[]).map(x=>aiSignalCard(x,false)).join("")||'<div class="chat-empty">Belum ada signal yang dipublish.</div>';mountNexoraAICharts(box);}
-async function runNexoraAI(){if(currentProfile?.role!=="ADMIN")return alert("Admin only.");const symbol=document.getElementById("ai-symbol").value,timeframe=document.getElementById("ai-timeframe").value,price=document.getElementById("ai-price").value.trim(),snapshot=document.getElementById("ai-snapshot").value.trim(),context=document.getElementById("ai-context").value;const result=document.getElementById("ai-result");result.className="ai-result show";result.innerHTML='<div class="ai-panel" style="padding:14px">🤖 Nexora AI sedang menganalisa market…</div>';try{const session=await supabaseClient.auth.getSession();const token=session.data.session?.access_token;if(!token)throw new Error("Session login tidak ditemukan.");const res=await fetch(NEXORA_AI_FN_URL,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({action:"scan",symbol,timeframe,current_price:price,context_mode:context,market_snapshot:snapshot})});const data=await res.json();if(!res.ok)throw new Error(data?.error||"AI engine gagal dipanggil.");nexoraAILastResult=data.result||data;result.innerHTML=aiSignalCard(nexoraAILastResult,true);const insert={...nexoraAILastResult,is_published:false,status:"DRAFT",created_by:currentUser.id,source:"nexora-ai"};delete insert.id;delete insert.created_at;delete insert.updated_at;const saved=await supabaseClient.from("ai_signals").insert(insert).select().single();if(saved.error)throw saved.error;result.innerHTML=aiSignalCard(saved.data,true);await loadNexoraAIHistory();}catch(e){result.innerHTML='<div class="ai-panel" style="padding:14px;color:#ff9aaa">❌ '+aiEsc(e.message||e)+"</div>";}}
+async function loadNexoraAIHistory(){const box=document.getElementById("ai-admin-history");if(!box)return;const {data,error}=await supabaseClient.from("ai_signals").select("*").order("created_at",{ascending:false}).limit(30);if(error){box.innerHTML='<div class="chat-empty">'+aiEsc(error.message)+"</div>";return;}box.innerHTML=(data||[]).map(x=>aiSignalCard(x,true)).join("")||'<div class="chat-empty">Belum ada hasil AI. Jalankan Analyze Market.</div>';initNexoraAICharts();}
+async function loadNexoraPublishedSignals(){const box=document.getElementById("ai-published-list");const {data,error}=await supabaseClient.from("ai_signals").select("*").eq("is_published",true).order("created_at",{ascending:false}).limit(30);if(error){box.innerHTML='<div class="chat-empty">'+aiEsc(error.message)+"</div>";return;}box.innerHTML=(data||[]).map(x=>aiSignalCard(x,false)).join("")||'<div class="chat-empty">Belum ada signal yang dipublish.</div>';initNexoraAICharts();}
+async function runNexoraAI(){if(currentProfile?.role!=="ADMIN")return alert("Admin only.");const symbol=document.getElementById("ai-symbol").value,timeframe=document.getElementById("ai-timeframe").value,price=document.getElementById("ai-price").value.trim(),snapshot=document.getElementById("ai-snapshot").value.trim(),context=document.getElementById("ai-context").value;const result=document.getElementById("ai-result");result.className="ai-result show";result.innerHTML='<div class="ai-panel" style="padding:14px">🤖 Nexora AI sedang menganalisa market…</div>';try{const session=await supabaseClient.auth.getSession();const token=session.data.session?.access_token;if(!token)throw new Error("Session login tidak ditemukan.");const res=await fetch(NEXORA_AI_FN_URL,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({action:"scan",symbol,timeframe,current_price:price,context_mode:context,market_snapshot:snapshot})});const data=await res.json();if(!res.ok)throw new Error(data?.error||"AI engine gagal dipanggil.");nexoraAILastResult=data.result||data;result.innerHTML=aiSignalCard(nexoraAILastResult,true);initNexoraAICharts();const insert={...nexoraAILastResult,is_published:false,status:"DRAFT",created_by:currentUser.id,source:"nexora-ai"};delete insert.id;delete insert.created_at;delete insert.updated_at;const saved=await supabaseClient.from("ai_signals").insert(insert).select().single();if(saved.error)throw saved.error;result.innerHTML=aiSignalCard(saved.data,true);initNexoraAICharts();await loadNexoraAIHistory();}catch(e){result.innerHTML='<div class="ai-panel" style="padding:14px;color:#ff9aaa">❌ '+aiEsc(e.message||e)+"</div>";}}
 async function publishNexoraSignal(id,shouldPublish){if(currentProfile?.role!=="ADMIN")return alert("Admin only.");const {error}=await supabaseClient.from("ai_signals").update({is_published:shouldPublish,status:shouldPublish?"PUBLISHED":"DRAFT",updated_at:new Date().toISOString()}).eq("id",id);if(error)return alert(error.message);if(shouldPublish){await supabaseClient.from("ai_signal_settings").update({published:true,updated_by:currentUser.id,updated_at:new Date().toISOString()}).eq("id",1);const {data:sig}=await supabaseClient.from("ai_signals").select("symbol,timeframe,decision,setup").eq("id",id).single();if(sig){const {data:profiles}=await supabaseClient.from("profiles").select("id");const rows=(profiles||[]).map(p=>({user_id:p.id,actor_id:currentUser.id,type:"ai_signal",title:`🤖 NEXORA AI • ${sig.symbol} ${sig.decision}`,body:`${sig.timeframe} · ${sig.setup||"Validated market setup"} · Signal baru dipublish oleh AI Lab.`,broadcast_id:null,url:"/?open=ai-signal"}));if(rows.length){const {data:inserted,error:nErr}=await supabaseClient.from("notifications").insert(rows).select("id");if(nErr)console.warn("AI notification:",nErr);else await dispatchPushForNotifications((inserted||[]).map(x=>x.id));}}}await loadNexoraAISettings();await loadNexoraAIHistory();alert(shouldPublish?"Signal berhasil dipublish ke member.":"Signal dikembalikan ke draft.");}
 async function deleteNexoraSignal(id){if(currentProfile?.role!=="ADMIN")return alert("Admin only.");if(!confirm("Hapus hasil AI ini?"))return;const {error}=await supabaseClient.from("ai_signals").delete().eq("id",id);if(error)return alert(error.message);await loadNexoraAIHistory();}
 function clearNexoraAIForm(){document.getElementById("ai-price").value="";document.getElementById("ai-snapshot").value="";document.getElementById("ai-result").className="ai-result";document.getElementById("ai-result").innerHTML="";}
