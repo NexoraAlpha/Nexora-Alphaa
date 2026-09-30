@@ -538,6 +538,370 @@ body.chat-focus-mode{overflow:hidden}.chat-focus-mode .bottom-nav{display:none!i
 .chat-action-modal .modal{max-width:420px}.chat-action-list{display:grid;gap:8px;margin-top:12px}.chat-action-list button{width:100%;text-align:left;border:1px solid var(--line);background:rgba(12,29,52,.72);color:#eaf3ff;border-radius:13px;padding:12px 14px;font-weight:700}.chat-action-list button:hover{background:rgba(42,91,156,.34)}
 .private-attach{width:45px;border:1px solid var(--line);border-radius:14px;background:rgba(13,30,53,.82);color:#fff;font-size:18px;cursor:pointer}.private-reply-hint{display:none;padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:rgba(24,53,91,.5);color:#bcd5f5;font-size:10px;margin:0 10px 8px}.private-image{display:block;max-width:min(360px,100%);max-height:360px;border-radius:13px;border:1px solid var(--line);margin-top:7px;object-fit:contain;background:#020915;cursor:pointer}.private-deleted{color:#8293ab;font-style:italic}.private-edited{font-size:8px;color:#91a8c8;margin-left:4px}.private-reactions,.private-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}.private-action{font-size:10px;padding:4px 7px;border:1px solid var(--line);border-radius:9px;color:#c8d8ef;background:rgba(10,24,44,.8);cursor:pointer}.poll-card{margin:10px 14px;padding:14px;border:1px solid rgba(91,159,255,.3);border-radius:17px;background:linear-gradient(145deg,rgba(21,54,96,.48),rgba(8,20,39,.82))}.poll-kicker{font-size:9px;letter-spacing:.13em;color:var(--blue);font-weight:900}.poll-question{font-weight:800;font-size:14px;margin:6px 0 10px}.poll-option{display:flex;align-items:center;gap:8px;padding:9px 10px;border:1px solid var(--line);border-radius:11px;background:rgba(5,15,29,.6);margin-top:6px;color:#eaf3ff}.poll-option input{accent-color:#5da4ff}.poll-result{font-size:9px;color:#91a8c8;margin-left:auto}.poll-actions{display:flex;gap:7px;margin-top:10px}.poll-actions button{border:1px solid var(--line);border-radius:10px;background:rgba(16,35,63,.8);color:#dbeaff;padding:7px 10px;font-size:10px}.poll-admin-btn{display:none}
 @media(max-width:520px){.private-composer{align-items:flex-end}.private-attach{width:42px}.private-image{max-height:280px}}
+
+/* =========================================================
+   NEXORA ALPHA — LIQUID GLASS UI OVERRIDE
+   Visual-only layer: existing HTML, JS, Supabase and routing
+   are intentionally left untouched.
+   ========================================================= */
+
+:root{
+  --nx-glass-bg:rgba(255,255,255,.075);
+  --nx-glass-bg-strong:rgba(255,255,255,.105);
+  --nx-glass-border:rgba(255,255,255,.22);
+  --nx-glass-border-soft:rgba(150,205,255,.16);
+  --nx-glass-highlight:rgba(255,255,255,.42);
+  --nx-glass-shadow:0 24px 70px rgba(0,0,0,.38),0 8px 28px rgba(30,110,255,.10);
+  --nx-glass-blur:28px;
+}
+
+/* Deep, luminous background */
+html,body{
+  background:
+    radial-gradient(circle at 16% 8%,rgba(42,133,255,.12),transparent 28%),
+    radial-gradient(circle at 86% 18%,rgba(137,54,255,.10),transparent 30%),
+    radial-gradient(circle at 50% 92%,rgba(0,210,255,.07),transparent 32%),
+    #020713 !important;
+}
+
+body{
+  position:relative;
+  isolation:isolate;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:-20%;
+  z-index:-2;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse at 20% 30%,rgba(26,122,255,.12),transparent 30%),
+    radial-gradient(ellipse at 78% 25%,rgba(157,54,255,.10),transparent 27%),
+    radial-gradient(ellipse at 55% 82%,rgba(0,199,255,.08),transparent 28%);
+  filter:blur(45px);
+  animation:nxGlassAmbient 18s ease-in-out infinite alternate;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.018),transparent 35%,rgba(92,165,255,.025) 70%,rgba(186,82,255,.018));
+}
+
+@keyframes nxGlassAmbient{
+  0%{transform:translate3d(-2%,0,0) scale(1)}
+  50%{transform:translate3d(2%,-1%,0) scale(1.04)}
+  100%{transform:translate3d(-1%,2%,0) scale(1.02)}
+}
+
+/* Shared glass geometry */
+.topbar,
+.panel,
+.feature,
+.ticker,
+.news,
+.segmented,
+.modal,
+.card,
+.admin-card,
+.stat-card,
+.profile-card,
+.notification-card,
+.chat-panel,
+.chat-message,
+.course-card,
+.lesson-card,
+.academy-card,
+.settings-card,
+.table-wrap{
+  position:relative;
+  overflow:hidden;
+  border-color:var(--nx-glass-border-soft) !important;
+  background:
+    linear-gradient(145deg,
+      rgba(255,255,255,.105) 0%,
+      rgba(255,255,255,.045) 34%,
+      rgba(9,22,43,.54) 100%) !important;
+  backdrop-filter:blur(var(--nx-glass-blur)) saturate(165%);
+  -webkit-backdrop-filter:blur(var(--nx-glass-blur)) saturate(165%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.24),
+    inset 0 -1px 0 rgba(0,0,0,.25),
+    0 24px 70px rgba(0,0,0,.30),
+    0 0 36px rgba(60,145,255,.055) !important;
+}
+
+/* Glass highlight / reflective rim */
+.topbar::before,
+.panel::before,
+.feature::before,
+.ticker::before,
+.news::before,
+.modal::before,
+.card::before,
+.admin-card::before,
+.stat-card::before,
+.profile-card::before,
+.notification-card::before,
+.chat-panel::before,
+.chat-message::before,
+.course-card::before,
+.lesson-card::before,
+.academy-card::before,
+.settings-card::before,
+.table-wrap::before,
+.btn::before,
+.icon-btn::before,
+.status::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:inherit;
+  pointer-events:none;
+  background:
+    linear-gradient(112deg,
+      rgba(255,255,255,.34) 0%,
+      rgba(255,255,255,.07) 10%,
+      transparent 24%,
+      transparent 68%,
+      rgba(111,183,255,.08) 83%,
+      rgba(191,88,255,.08) 100%);
+  opacity:.72;
+}
+
+/* Strong top rim */
+.topbar::after,
+.panel::after,
+.feature::after,
+.news::after,
+.modal::after,
+.card::after,
+.admin-card::after,
+.stat-card::after,
+.profile-card::after,
+.notification-card::after,
+.chat-panel::after,
+.course-card::after,
+.lesson-card::after,
+.academy-card::after,
+.settings-card::after{
+  content:"";
+  position:absolute;
+  left:8%;
+  right:12%;
+  top:0;
+  height:1px;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.58),rgba(124,188,255,.24),transparent);
+  filter:blur(.2px);
+}
+
+/* Navbar becomes a floating glass capsule */
+.topbar{
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.035) 42%,rgba(8,19,38,.64)) !important;
+  border-radius:28px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.34),
+    inset 0 -1px 0 rgba(0,0,0,.30),
+    0 25px 70px rgba(0,0,0,.42),
+    0 0 45px rgba(58,141,255,.10) !important;
+}
+
+/* Hero logo gets the same polished glass ambience */
+.hero-logo{
+  filter:
+    drop-shadow(0 20px 42px rgba(43,144,255,.24))
+    drop-shadow(0 0 25px rgba(133,65,255,.12)) !important;
+}
+
+/* Buttons: glossy pill / capsule */
+.btn,
+.icon-btn,
+.status{
+  position:relative;
+  overflow:hidden;
+  border-color:rgba(255,255,255,.24) !important;
+  backdrop-filter:blur(24px) saturate(175%);
+  -webkit-backdrop-filter:blur(24px) saturate(175%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.30),
+    inset 0 -1px 0 rgba(0,0,0,.22),
+    0 12px 32px rgba(0,0,0,.24) !important;
+}
+
+.btn{
+  border-radius:22px !important;
+  background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(13,34,64,.50)) !important;
+}
+
+.btn.primary{
+  background:linear-gradient(145deg,rgba(248,252,255,.96),rgba(154,201,255,.82)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.80),
+    0 12px 32px rgba(75,155,255,.18) !important;
+}
+
+.icon-btn{
+  border-radius:18px !important;
+  background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(9,24,47,.56)) !important;
+}
+
+.status{
+  border-radius:18px !important;
+  background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(6,19,38,.62)) !important;
+}
+
+/* Pills / segmented controls */
+.segmented{
+  border-radius:20px !important;
+  padding:5px !important;
+}
+
+.segmented button{
+  position:relative;
+  z-index:1;
+  border-radius:15px !important;
+}
+
+.segmented button.active{
+  background:
+    linear-gradient(145deg,rgba(95,168,255,.24),rgba(75,93,255,.10)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.20),
+    inset 0 0 0 1px rgba(116,185,255,.18),
+    0 6px 22px rgba(44,127,255,.12) !important;
+}
+
+/* Smaller list items: translucent inner glass */
+.ticker,
+.news{
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.075),rgba(7,20,39,.52)) !important;
+}
+
+.ticker{
+  border-radius:20px !important;
+}
+
+.news{
+  border-radius:21px !important;
+}
+
+/* Feature cards */
+.feature{
+  border-radius:28px !important;
+  min-height:132px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.095),rgba(8,20,39,.56)) !important;
+}
+
+/* Hover: subtle liquid depth rather than a flat color swap */
+.btn,
+.icon-btn,
+.ticker,
+.news,
+.feature,
+.panel{
+  transition:
+    transform .22s ease,
+    border-color .22s ease,
+    box-shadow .22s ease,
+    background .22s ease;
+}
+
+.btn:hover,
+.icon-btn:hover,
+.ticker:hover,
+.news:hover,
+.feature:hover{
+  transform:translateY(-2px);
+  border-color:rgba(151,211,255,.34) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.30),
+    0 20px 46px rgba(0,0,0,.32),
+    0 0 28px rgba(67,151,255,.10) !important;
+}
+
+/* Inputs / textareas / selects */
+input,
+textarea,
+select{
+  border-color:rgba(255,255,255,.18) !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.085),rgba(6,18,35,.55)) !important;
+  backdrop-filter:blur(22px) saturate(150%);
+  -webkit-backdrop-filter:blur(22px) saturate(150%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    inset 0 -1px 0 rgba(0,0,0,.18) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:rgba(117,192,255,.48) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.20),
+    0 0 0 3px rgba(72,153,255,.09),
+    0 0 28px rgba(72,153,255,.10) !important;
+}
+
+/* Modal / overlay glass */
+.modal{
+  border-radius:30px !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.115),rgba(5,15,30,.72)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.32),
+    0 35px 100px rgba(0,0,0,.52),
+    0 0 60px rgba(55,142,255,.10) !important;
+}
+
+/* Keep text above decorative pseudo layers */
+.topbar > *,
+.panel > *,
+.feature > *,
+.ticker > *,
+.news > *,
+.modal > *,
+.card > *,
+.admin-card > *,
+.stat-card > *,
+.profile-card > *,
+.notification-card > *,
+.chat-panel > *,
+.chat-message > *,
+.course-card > *,
+.lesson-card > *,
+.academy-card > *,
+.settings-card > *{
+  position:relative;
+  z-index:1;
+}
+
+/* Mobile: preserve the original responsive behavior */
+@media (max-width:720px){
+  .topbar{
+    border-radius:23px !important;
+    backdrop-filter:blur(22px) saturate(155%);
+    -webkit-backdrop-filter:blur(22px) saturate(155%);
+  }
+  .panel,.feature,.news,.ticker{
+    border-radius:22px !important;
+  }
+}
+
+/* Accessibility / reduced motion */
+@media (prefers-reduced-motion:reduce){
+  body::before{animation:none}
+  .btn,.icon-btn,.ticker,.news,.feature,.panel{transition:none}
+}
+
 </style>
 </head>
 <body><div id="nx-bg-motion" aria-hidden="true"><canvas id="nx-bg-canvas"></canvas><span class="nx-motion-glow one"></span><span class="nx-motion-glow two"></span><span class="nx-motion-glow three"></span><span class="nx-light-streak s1"></span><span class="nx-light-streak s2"></span><span class="nx-light-streak s3"></span><span class="nx-light-streak s4"></span><span class="nx-light-streak s5"></span></div>
