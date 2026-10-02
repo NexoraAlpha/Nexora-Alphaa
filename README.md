@@ -1,4 +1,4 @@
-# Nexora Alpha
+# TradeForge Ground
 
 UI-only prototype. No login, Supabase, API, database, service worker, or realtime backend is enabled.
 

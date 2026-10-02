@@ -16,9 +16,9 @@ self.addEventListener("push", (event) => {
     data = { body: event.data ? event.data.text() : "" };
   }
 
-  const title = data.title || "NEXORA ALPHA";
+  const title = data.title || "TRADEFORGE GROUND";
   const options = {
-    body: data.body || "Ada notifikasi baru di Nexora Alpha.",
+    body: data.body || "Ada notifikasi baru di TradeForge Ground.",
     icon: data.icon || "/nexora-icon-192.png",
     badge: data.badge || "/nexora-icon-192.png",
     tag: data.tag || "nexora-notification",
