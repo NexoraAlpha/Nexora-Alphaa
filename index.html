@@ -1280,6 +1280,73 @@ body.nx-theme-enabled::before{
   .nx-theme-option{transition:none}
 }
 </style>
+
+<style id="tradeforge-ground-forge-theme">
+/* TRADEFORGE GROUND — FORGE STEEL VISUAL THEME
+   Visual-only override: preserves layout, behavior, navigation and functionality. */
+:root{
+  --bg:#070707;
+  --panel:rgba(18,18,20,.78);
+  --panel2:rgba(25,25,28,.90);
+  --line:rgba(205,210,218,.16);
+  --line2:rgba(220,224,230,.34);
+  --text:#f4f4f2;
+  --muted:#9a9da3;
+  --blue:#d7d9dc;
+  --blue2:#aeb3ba;
+  --cyan:#eef0f2;
+  --shadow:0 24px 70px rgba(0,0,0,.52);
+}
+html,body{background:#050505;color:var(--text)}
+body{background:#050505}
+.topbar{background:rgba(9,9,10,.84);border-color:rgba(205,210,218,.18)}
+.icon-btn{background:rgba(24,24,26,.78);border-color:rgba(205,210,218,.20)}
+.status{background:linear-gradient(145deg,rgba(31,31,34,.97),rgba(9,9,10,.97));border-color:rgba(220,224,230,.30);box-shadow:inset 0 0 18px rgba(255,255,255,.035),0 8px 24px rgba(0,0,0,.28)}
+.btn{background:linear-gradient(145deg,rgba(48,49,52,.92),rgba(18,18,20,.92));border-color:rgba(220,224,230,.32)}
+.segmented button.active{background:rgba(220,224,230,.12);box-shadow:inset 0 0 0 1px rgba(220,224,230,.18)}
+.ticker{border-color:rgba(205,210,218,.11);background:rgba(18,18,20,.72)}
+.news .tag,.modal-kicker,.text-btn,.ai-kicker,.poll-kicker{color:#d7d9dc}
+.pinned{border-color:rgba(220,224,230,.25);background:rgba(90,92,96,.15);color:#d7d9dc}
+.bubble{background:rgba(27,27,30,.90);border-color:rgba(205,210,218,.13)}
+.member{border-bottom-color:rgba(205,210,218,.08)}
+.bottom-nav{border-color:rgba(205,210,218,.22);background:rgba(7,7,8,.95)}
+.nav-btn.active:not(.nav-chat){background:linear-gradient(180deg,rgba(220,224,230,.13),rgba(90,92,96,.12));box-shadow:inset 0 0 0 1px rgba(220,224,230,.13);color:#fff}
+.nav-chat{background:linear-gradient(145deg,rgba(38,39,42,.99),rgba(9,9,10,.99));border-color:rgba(230,233,236,.58);box-shadow:0 0 0 2px rgba(8,8,9,.98),0 0 0 3px rgba(220,224,230,.10),0 12px 34px rgba(0,0,0,.42),0 4px 14px rgba(0,0,0,.50),inset 0 0 22px rgba(255,255,255,.055)}
+.section-head{border-color:rgba(205,210,218,.14);background:radial-gradient(circle at 0% 0%,rgba(230,233,236,.07),transparent 42%),linear-gradient(135deg,rgba(28,28,31,.94),rgba(8,8,9,.84))}
+#home .hero{border-color:rgba(205,210,218,.14)}
+.badge-role{border-color:rgba(205,210,218,.20);background:rgba(150,153,158,.12);color:#d7d9dc}
+.admin-menu-card:hover{border-color:rgba(220,224,230,.35);background:linear-gradient(145deg,rgba(35,35,38,.94),rgba(8,8,9,.95))}
+.profile-photo-card{border-color:rgba(205,210,218,.24);background:linear-gradient(145deg,rgba(30,30,33,.76),rgba(8,8,9,.78))}
+.chat-back-btn{background:linear-gradient(145deg,rgba(31,31,34,.97),rgba(8,8,9,.97));border-color:rgba(205,210,218,.20)}
+.academy-card:hover{border-color:rgba(220,224,230,.35)}
+.academy-chapter:hover{border-color:rgba(220,224,230,.35);background:rgba(42,42,45,.60)}
+.academy-chapter-num{background:rgba(180,184,190,.12);border-color:rgba(205,210,218,.24);color:#d7d9dc}
+.academy-modal-tabs button.active{background:rgba(205,210,218,.15);color:#fff;border-color:rgba(220,224,230,.36)}
+.setting-row,.nx-intensity-setting{border-color:rgba(205,210,218,.09)}
+.nx-switch-track{border-color:rgba(205,210,218,.25);background:#171719}
+.nx-switch input:checked + .nx-switch-track{background:linear-gradient(90deg,#8d9197,#e4e6e8);border-color:rgba(235,237,239,.65);box-shadow:0 0 18px rgba(220,224,230,.16)}
+.nx-range{background:linear-gradient(90deg,#8d9197 0%,#e4e6e8 60%,#292a2d 60%,#292a2d 100%);border-color:rgba(205,210,218,.18)}
+.ai-manual-box{border-color:rgba(205,210,218,.12);background:rgba(20,20,22,.55)}
+.ai-signal-card{border-color:rgba(205,210,218,.25);background:linear-gradient(145deg,rgba(40,40,43,.55),rgba(8,8,9,.72))}
+.ai-metric{border-color:rgba(205,210,218,.10);background:rgba(10,10,11,.55)}
+.ai-locked{border-color:rgba(205,210,218,.22);background:rgba(12,12,13,.48)}
+.inbox-search-wrap{background:rgba(8,8,9,.84);box-shadow:inset 0 0 18px rgba(255,255,255,.025)}
+.inbox-item{border-color:rgba(205,210,218,.10);background:linear-gradient(145deg,rgba(25,25,28,.88),rgba(8,8,9,.84))}
+.inbox-item:hover{border-color:rgba(220,224,230,.30);background:linear-gradient(145deg,rgba(38,38,41,.92),rgba(9,9,10,.94))}
+.inbox-community{border-color:rgba(220,224,230,.30);background:linear-gradient(145deg,rgba(50,50,54,.58),rgba(8,8,9,.90));box-shadow:0 0 28px rgba(255,255,255,.035)}
+.pin-pill,.conversation-pin{color:#d7d9dc;border-color:rgba(205,210,218,.25);background:rgba(160,164,170,.10)}
+.private-bubble{border-color:rgba(205,210,218,.12);background:rgba(27,27,30,.92)}
+.private-msg.mine .private-bubble{background:linear-gradient(145deg,rgba(86,89,94,.82),rgba(37,38,41,.78));border-color:rgba(220,224,230,.24)}
+.poll-card{border-color:rgba(205,210,218,.25);background:linear-gradient(145deg,rgba(43,43,47,.50),rgba(9,9,10,.84))}
+.nx-motion-glow.one{background:radial-gradient(circle,rgba(220,224,230,.22) 0%,rgba(220,224,230,.08) 34%,transparent 70%)}
+.nx-motion-glow.two{background:radial-gradient(circle,rgba(145,150,158,.18) 0%,rgba(145,150,158,.07) 36%,transparent 72%)}
+.nx-motion-glow.three{background:radial-gradient(circle,rgba(245,245,245,.12) 0%,rgba(180,184,190,.05) 38%,transparent 74%)}
+#nx-bg-motion{background:#050505}
+#nx-bg-motion::before{background-image:linear-gradient(rgba(210,214,220,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(210,214,220,.035) 1px,transparent 1px)}
+/* Theme-system colors: keep the existing appearance picker functional, but make its default TradeForge look steel/black. */
+.nx-theme-panel{background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border-color:rgba(220,224,230,.14)}
+.nx-theme-option.is-active{border-color:rgba(230,233,236,.45)!important;box-shadow:0 0 0 1px rgba(230,233,236,.10),0 10px 30px rgba(0,0,0,.25)}
+</style>
 </head>
 <body><div id="nx-bg-motion" aria-hidden="true"><canvas id="nx-bg-canvas"></canvas><span class="nx-motion-glow one"></span><span class="nx-motion-glow two"></span><span class="nx-motion-glow three"></span><span class="nx-light-streak s1"></span><span class="nx-light-streak s2"></span><span class="nx-light-streak s3"></span><span class="nx-light-streak s4"></span><span class="nx-light-streak s5"></span></div>
 <div class="app">
@@ -2266,7 +2333,15 @@ document.addEventListener("DOMContentLoaded",initBackgroundAnimation);
 <script id="nexora-theme-system">
 (() => {
   const THEMES = {
-    ocean: {
+    forge: {
+      name: "Forge",
+      desc: "Steel • Obsidian",
+      main: "#d7d9dc",
+      second: "#8d9197",
+      third: "#303236",
+      glow: "rgba(220,224,230,.12)"
+    },
+    ocean:
       name: "Ocean",
       desc: "Blue • Cyan",
       main: "#2b8cff",
@@ -2319,7 +2394,7 @@ document.addEventListener("DOMContentLoaded",initBackgroundAnimation);
   const KEY = "nexora-theme";
 
   function applyTheme(id){
-    const t = THEMES[id] || THEMES.ocean;
+    const t = THEMES[id] || THEMES.forge;
     const root = document.documentElement;
     document.body.classList.add("nx-theme-enabled");
 
@@ -2373,11 +2448,11 @@ document.addEventListener("DOMContentLoaded",initBackgroundAnimation);
       btn.addEventListener("click", () => applyTheme(btn.dataset.theme));
     });
 
-    applyTheme(localStorage.getItem(KEY) || "ocean");
+    applyTheme(localStorage.getItem(KEY) || "forge");
   }
 
   function boot(){
-    applyTheme(localStorage.getItem(KEY) || "ocean");
+    applyTheme(localStorage.getItem(KEY) || "forge");
     makePicker();
     setTimeout(makePicker, 300);
     setTimeout(makePicker, 1000);
